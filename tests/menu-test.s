@@ -1,0 +1,53 @@
+ .text
+.globl _MenuKeysTest
+_MenuKeysTest:
+    stp x29,x30,[sp,#-0x70]!
+    stp x19,x20,[sp,#0x10]
+    stp x21,x22,[sp,#0x20]
+    stp x23,x24,[sp,#0x30]
+    stp x25,x26,[sp,#0x40]
+    add x29,sp,#0x50
+    str xzr,[x29,#0x10]
+    mov w25,w0
+    mov w24,w1
+    mov w26,w2
+    mov w23,w3
+    mov w22,w4
+    mov w20,wzr
+    mov w19,wzr
+.long 1384120373
+.long 922747801
+.long 922747767
+.long 1384120405
+.long 922747704
+.long 3573751839
+.long 3573751839
+.long 1384120437
+.long 922747572
+.long 960512936
+.long 922747496
+.long 1384120469
+.long 922747443
+.long 960513960
+.long 905970120
+.long 335544334
+.long 706216744
+.long 705954056
+.long 1895826207
+.long 1384120393
+.long 445191465
+.long 1895826239
+.long 446629161
+.long 1895825695
+.long 1384120458
+.long 445255989
+.long 922746984
+.long 922746963
+.long 1384120341
+    mov w0,w21
+    ldp x25,x26,[sp,#0x40]
+    ldp x23,x24,[sp,#0x30]
+    ldp x21,x22,[sp,#0x20]
+    ldp x19,x20,[sp,#0x10]
+    ldp x29,x30,[sp],#0x70
+    ret
