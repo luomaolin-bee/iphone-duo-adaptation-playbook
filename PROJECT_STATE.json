@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "project": "iphone-duo-adaptation-playbook",
+  "archive_date": "2026-11-02",
+  "current_source_version": "0.2.19",
+  "github_visibility_requested": "private",
+  "repo_name": "iphone-duo-adaptation-playbook",
+  "input_scope": "Existing native iOS Unity IPA plus separately owned resource archive; Unity project unavailable",
+  "package_baselines": [
+    {
+      "filename": "SilksongNative-0.8.2-unsigned-duo-unified-layout-0.2.18.ipa",
+      "engine_sha256": "a00298a2c10dbb3d891141564e22c7100abdaff4750561f8866f6e85df391cb0",
+      "engine_uuid_hex": "ad0a91dfb78c38bc8fb70aeba6d2b6a5",
+      "ipa_sha256": "39bca4be1dfc745d11f8b73517059771220cbc39c6c595087fbdc15d704960ea"
+    },
+    {
+      "filename": "SilksongNative-0.8.2-unsigned-duo-fakelu-0.2.19.ipa",
+      "engine_sha256": "a00298a2c10dbb3d891141564e22c7100abdaff4750561f8866f6e85df391cb0",
+      "engine_uuid_hex": "ad0a91dfb78c38bc8fb70aeba6d2b6a5",
+      "ipa_sha256": "b49d6f9d5ebde9b308e4484fd675e3d9ec5581e68086f28b0ae9ebedae11a2e8"
+    }
+  ],
+  "historical_engine_input": {
+    "filename": "SilksongNative-0.8.2-unsigned-duo-recovery-0.2.14.ipa",
+    "engine_sha256": "4bf0fedc15705535a0bb19046e17437b6938f4e861135f481a0f3dac10113fe1",
+    "engine_uuid_hex": "ad0a91dfb78c38bc8fb70aeba6d2b6a5"
+  },
+  "current_artifact_sha256": "b49d6f9d5ebde9b308e4484fd675e3d9ec5581e68086f28b0ae9ebedae11a2e8",
+  "preferences": {
+    "layouts": "DuoUnifiedLayouts018",
+    "profiles": [
+      "外屏竖屏018",
+      "外屏横屏018",
+      "内屏竖屏018",
+      "内屏横屏018",
+      "半折叠018"
+    ],
+    "glass": "DuoConsoleGlass017",
+    "fps": "DuoFPS018",
+    "auto_menus": "DuoAutoMenus018",
+    "reflection_quality": "DuoReflectionQuality018",
+    "feedback": "DuoFeedback019"
+  },
+  "sdk": {
+    "used": "iPhoneOS27.2.sdk",
+    "reserved_regions_and_hinge_declared": "iOS27.1+ in this local SDK",
+    "glass_runtime_guard": "iOS26+",
+    "deployment_target": "15.0 (not a guarantee every feature works on iOS15)"
+  },
+  "observed_evidence": {
+    "provided": "six game screenshots and one brand image with final user wrap-up",
+    "diagnostic_json_for_latest_screenshots": false,
+    "version_inferred_from_context": "0.2.19",
+    "game_fps_range": [
+      59,
+      60
+    ],
+    "deck_reflection_fps_range": [
+      19,
+      20
+    ],
+    "whole_process_footprint_mb_range": [
+      1981,
+      2112
+    ],
+    "thermal_labels": [
+      "正常"
+    ],
+    "controlled_benchmark": false
+  },
+  "withdrawn_paths": [
+    "0.2.9 managed raycast with 32-bit GCHandle assumptions",
+    "0.2.13 native menu gate/GCHandle cleanup path",
+    "Executable helpers in Mach-O header padding"
+  ],
+  "unresolved": [
+    "Background restart/cold-launch cause without matching lifecycle/Jetsam logs",
+    "Complete per-menu/feedback/branding animation acceptance",
+    "Long-session memory/thermal performance",
+    "Vertical-hinge left/right console layout",
+    "Automatic conversion of non-iOS platform binaries: outside project scope"
+  ],
+  "native_bindings": {
+    "engineUUID": "ad0a91df-b78c-38bc-8fb7-0aeba6d2b6a5",
+    "GameObject.Find": "0x91881d4",
+    "GameObject.transform": "0x9185bc8",
+    "Transform.localScale.setter": "0x91bd748"
+  },
+  "source_entry": "src/DuoSceneBridge.m",
+  "future_agent_entry": "AI_HANDOFF.md",
+  "github_repository": "https://github.com/luomaolin-bee/iphone-duo-adaptation-playbook",
+  "archive_contents": "Source, docs, tests, manifests, reports, user screenshots; game binaries/resources/signing data excluded"
+}

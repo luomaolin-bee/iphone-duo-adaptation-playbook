@@ -1,0 +1,16 @@
+build/
+inputs/
+private/
+__pycache__/
+*.pyc
+*.ipa
+*.dylib
+*.o
+*.ips
+*.mobileprovision
+*.p12
+*.p8
+*.pem
+.DS_Store
+UnityFramework
+global-metadata.dat
