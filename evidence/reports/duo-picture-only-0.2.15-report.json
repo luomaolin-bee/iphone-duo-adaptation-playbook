@@ -1,0 +1,91 @@
+{
+  "output": "SilksongNative-0.8.2-unsigned-duo-picture-only-0.2.15.ipa",
+  "source": "SilksongNative-0.8.2-unsigned-duo-recovery-0.2.14.ipa",
+  "scope": "Picture only; input behavior retained from stable 0.2.14 for separate next step",
+  "portraitDivider": {
+    "outer": 0.625,
+    "inner": 0.645
+  },
+  "camera": "Existing ForceCameraAspect/Lite reads viewport pixel dimensions from two uint32 dimension values in verified writable padding. Minimum ratio 1:2; original orthographic scaling retained. No handles or object references.",
+  "patch": {
+    "stateAddress": "0xd785280",
+    "stateType": "two uint32 viewport dimensions, no handles or object references",
+    "patches": [
+      {
+        "offset": "0x2611100",
+        "before": "6855955248f5a772",
+        "after": "0800805208e0a772",
+        "purpose": "Permit portrait viewport ratios down to 1:2"
+      },
+      {
+        "offset": "0x26110e4",
+        "before": "000080d27053a995f60300aa000080d29653a995f70300aa",
+        "after": "a88b0590168142b9178542b91f2003d51f2003d51f2003d5",
+        "purpose": "Shared camera calculation uses viewport pixel dimensions"
+      },
+      {
+        "offset": "0x2610ef0",
+        "before": "000080d2ed53a995",
+        "after": "a88b05b0008142b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2610f04",
+        "before": "000080d21154a995",
+        "after": "a88b05b0008542b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2610f20",
+        "before": "000080d2e153a995",
+        "after": "a88b05b0008142b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2610f2c",
+        "before": "000080d20754a995",
+        "after": "a88b05b0008542b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2611ba0",
+        "before": "000080d2c150a995",
+        "after": "a88b0590008142b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2611bbc",
+        "before": "000080d2e350a995",
+        "after": "a88b0590008542b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2611bec",
+        "before": "000080d2ae50a995",
+        "after": "a88b0590008142b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2611bf8",
+        "before": "000080d2d450a995",
+        "after": "a88b0590008542b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      }
+    ]
+  },
+  "verified": [
+    "Strict compile",
+    "Clang analyzer zero diagnostics",
+    "Decoded all inline load destinations",
+    "Expected portrait ratios fit normalized viewport",
+    "Engine edit scope checked",
+    "No header executable helpers or native menu patch",
+    "ZIP integrity"
+  ],
+  "unverified": [
+    "Device startup",
+    "Actual camera/HUD framing and aspect",
+    "Visible region alignment with annotated red lines"
+  ],
+  "sha256": "9cc3fcbb7c24127415ef96e1c7e1e87f09e642575463cd1f695957fe87ca91fa"
+}

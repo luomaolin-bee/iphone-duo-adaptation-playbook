@@ -1,0 +1,83 @@
+{
+  "output": "SilksongNative-0.8.2-unsigned-duo-stability-camera-0.2.10.ipa",
+  "source": "SilksongNative-0.8.2-unsigned-duo-touch-ui-0.2.9.ipa",
+  "changes": [
+    "Payload/SilksongNative.app/Frameworks/UnityFramework.framework/UnityFramework",
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "directMenuBridge": "Removed from compilation. No custom managed UI raycast/tap invocation. Native Unity touch handling retained; backup confirm in More.",
+  "cameraPatch": {
+    "helperRange": [
+      "0x1800",
+      "0x1838"
+    ],
+    "calls": [
+      {
+        "address": "0x26110e8",
+        "oldTarget": "0x9065ea8",
+        "newTarget": "0x1800"
+      },
+      {
+        "address": "0x26110f4",
+        "oldTarget": "0x9065f4c",
+        "newTarget": "0x181c"
+      },
+      {
+        "address": "0x2610ef4",
+        "oldTarget": "0x9065ea8",
+        "newTarget": "0x1800"
+      },
+      {
+        "address": "0x2610f08",
+        "oldTarget": "0x9065f4c",
+        "newTarget": "0x181c"
+      },
+      {
+        "address": "0x2610f24",
+        "oldTarget": "0x9065ea8",
+        "newTarget": "0x1800"
+      },
+      {
+        "address": "0x2610f30",
+        "oldTarget": "0x9065f4c",
+        "newTarget": "0x181c"
+      },
+      {
+        "address": "0x2611ba4",
+        "oldTarget": "0x9065ea8",
+        "newTarget": "0x1800"
+      },
+      {
+        "address": "0x2611bc0",
+        "oldTarget": "0x9065f4c",
+        "newTarget": "0x181c"
+      },
+      {
+        "address": "0x2611bf0",
+        "oldTarget": "0x9065ea8",
+        "newTarget": "0x1800"
+      },
+      {
+        "address": "0x2611bfc",
+        "oldTarget": "0x9065f4c",
+        "newTarget": "0x181c"
+      }
+    ]
+  },
+  "cameraIntent": "ForceCameraAspect and Lite read actual rendering resolution for aspect calculations and resize detection. Other Screen getters and camera limits unchanged.",
+  "ui": "Compact four-action cluster, aligned lower control-strip settings/map/bag/pause/more; confirmed reflection implementation retained",
+  "checks": [
+    "Strict compilation",
+    "Clang analyzer: no diagnostics",
+    "Engine edits confined to 56 zero-padding bytes and ten BL instructions",
+    "Decoded helper ADRP and call destinations verified",
+    "ZIP integrity and file scope"
+  ],
+  "unverified": [
+    "Actual cause of touch crash without new crash log",
+    "On-device touch stability",
+    "Camera framing and render aspect",
+    "UI appearance and input behavior"
+  ],
+  "sha256": "b61e58cf3bb2a26c5c63b550d2df3f378cfbd53613eb098fafe5ea2ad87f920c"
+}

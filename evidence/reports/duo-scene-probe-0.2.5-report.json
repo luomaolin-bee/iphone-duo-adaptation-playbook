@@ -1,0 +1,22 @@
+{
+  "source": "SilksongNative-0.8.2-unsigned-duo-fullscreen-test-0.2.3.ipa",
+  "output": "SilksongNative-0.8.2-unsigned-duo-scene-probe-0.2.5.ipa",
+  "changed": [
+    "Payload/SilksongNative.app/Unity-iPhone",
+    "Payload/SilksongNative.app/Info.plist"
+  ],
+  "added": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "checks": [
+    "ZIP CRC passed",
+    "Only launcher and Info.plist changed; one bridge added",
+    "UnityFramework and TouchControls remain byte-identical to 0.2.3"
+  ],
+  "limitations": [
+    "Requires full re-signing including nested dylibs",
+    "No device execution verified",
+    "No claim of complete Duo adaptation"
+  ],
+  "sha256": "a31966dd40e35bcdf46033f05f1c081f9a6de05877ad08b8f0f4b758c1c5c079"
+}

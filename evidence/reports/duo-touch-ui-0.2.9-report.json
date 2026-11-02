@@ -1,0 +1,32 @@
+{
+  "source": "SilksongNative-0.8.2-unsigned-duo-scene-probe-0.2.5.ipa",
+  "output": "SilksongNative-0.8.2-unsigned-duo-touch-ui-0.2.9.ipa",
+  "changed": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "features": [
+    "Circular icon controls with bone/copper accents; eight-way joystick in all orientations",
+    "Four primary action keys; map/bag/pause icons; skill/tool keys expandable with hold input retained; backup confirm in More",
+    "Experimental UI raycast click dispatch to existing Unity IPointerClickHandler; no coordinate-based confirm shortcut",
+    "Experimental completed-Metal-frame readback, 256px downsample, Gaussian blur and vertical reflection behind folded controls; no frames saved to disk",
+    "Runtime occlusion/hinge regions used for bounds, including top camera strip and side cutout"
+  ],
+  "verified": [
+    "Strict compile passed",
+    "Clang analyzer: zero diagnostics",
+    "Control spacing across reported device sizes, including optional controls",
+    "Diagram geometry and touch-coordinate conversion arithmetic",
+    "Exact engine UUID and presentation-block capture offset checked",
+    "ZIP CRC and only-bridge-diff checks passed"
+  ],
+  "unverified": [
+    "On-device startup and render resolution changes",
+    "Menu activation behavior and touch raycasting across all game UI",
+    "Long-press gameplay, multitouch and joystick release",
+    "GPU capture compatibility/performance and visible reflection",
+    "Fold transition geometry and occlusion reporting"
+  ],
+  "sha256": "45e4ca219bfc70ba53e03a034f5f576d1ee8d7572e383b7f8c01814991981b54",
+  "status": "withdrawn",
+  "withdrawalReason": "Incorrect 32-bit GCHandle declarations/storage in pointer-handle IL2CPP build; do not use these released artifacts. Working sources audited; recovery 0.2.14 excludes these paths."
+}

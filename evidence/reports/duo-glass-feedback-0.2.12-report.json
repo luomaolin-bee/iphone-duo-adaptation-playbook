@@ -1,0 +1,30 @@
+{
+  "output": "SilksongNative-0.8.2-unsigned-duo-glass-feedback-0.2.12.ipa",
+  "source": "SilksongNative-0.8.2-unsigned-duo-divider-0.2.11.ipa",
+  "changed": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "features": [
+    "Native UIGlassEffect controls and joystick; existing hit regions retained",
+    "Press spring animation and attack-key haptic; not an attack-hit detector",
+    "Read-only health/game/UI/inventory/scene field observation, nominal 200ms interval",
+    "Life-decrease red edge and haptic gated by known PLAYING state, scene stability and cooldown",
+    "UI/scene transition decorative keyboard zoom and 36-particle gather/disperse; no input blocking",
+    "Respects Reduce Motion and Reduce Transparency"
+  ],
+  "verified": [
+    "Strict compile",
+    "Clang analyzer zero diagnostics",
+    "All 18 read-only IL2CPP APIs exported in game binary",
+    "Damage policy tests cover healing, scene changes, paused game, death, invalid values and cooldown",
+    "ZIP integrity; engine/resources and camera geometry unchanged from 0.2.11"
+  ],
+  "unverified": [
+    "Device startup",
+    "Glass appearance and performance",
+    "Haptic behavior",
+    "Whether game singleton/state field names resolve at runtime",
+    "Damage/UI/inventory/scene event coverage and animation behavior"
+  ],
+  "sha256": "1771b85ddaa9998c4ce83ff94f3413e3800b22ba7b16f49e198e206b613a4ffa"
+}

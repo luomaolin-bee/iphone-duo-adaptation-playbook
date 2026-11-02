@@ -1,0 +1,798 @@
+{
+  "version": "0.2.18",
+  "output": "SilksongNative-0.8.2-unsigned-duo-unified-layout-0.2.18.ipa",
+  "baseline": "SilksongNative-0.8.2-unsigned-duo-console-glass-0.2.17.ipa",
+  "status": "Unsigned test build. User verified 0.2.17 on device; 0.2.18 compiled and host-checked, pending iPhone verification.",
+  "changes": [
+    "Only bridge dylib replaced. Unity engine, launcher, game assets, input binding JSON and touch library preserved.",
+    "All 14 editable elements including back, gear/edit, more and optional FPS share one editor; title drag and collapse avoid covering keys.",
+    "Five independent layout profiles approximately traced from user screenshots; normalized centre coordinates; full-width canvas with 8pt edge margin instead of an 84pt right-side strip.",
+    "Secondary keys can be aligned horizontally or vertically; layout changes persist independently per posture. Old 0.2.17 preferences retained separately.",
+    "Read-only GameState/UIState/inventory fields guide menu simplification; unknown state keeps controls visible. Half-fold retains all controls.",
+    "Initial icon redraw and explicit foreground glyphs avoid waiting for first press; system UIGlassEffect with thin highlights and one-shot 18-layer particle gather, reduce-motion respected.",
+    "Half-fold decorative background extends across software hinge gap, while button hit areas remain below hinge; physical crease is unaffected.",
+    "GPU reflection uses reused 256px maximum-edge textures and one in-flight readback; UIImageView image swap avoids repeated ornament redraw.",
+    "Balanced reflection target 20 FPS, smooth target 30 FPS, low power 12 and elevated thermal 10. Editor/background pause capture. Targets are not measured device results.",
+    "HUD hierarchy search throttled from repeated per-tick scanning to changes or every 3 seconds; field metadata cached.",
+    "Optional draggable submitted-frame FPS, resident-memory and reflection-latency monitor. No rolling frame image history."
+  ],
+  "inputPolicy": "Existing gameplay HID codes preserved; Skill/Tool exposed by default; Attack-confirm and dedicated Escape-back retained from 0.2.16. Internal action names are legacy names and are not automatically relabelled.",
+  "verified": [
+    "Strict arm64 iOS compilation with warnings treated as errors",
+    "Clang static analyzer zero diagnostics",
+    "70 full-width right-edge drag checks across 14 controls and 5 postures",
+    "No default control rectangle overlaps among all 14 editable elements per profile, including optional FPS",
+    "Five independent profile persistence; horizontal/vertical secondary alignment; menu/half-fold/editor visibility policies",
+    "Verified source equality for render resolution synchronization, game-region geometry and gameplay joystick mapping apart from editor input suppression",
+    "Return pulse visibility override precedes automatic menu filtering",
+    "Native geometry preview rendered and inspected",
+    "IPA integrity and exactly one replaced archive entry"
+  ],
+  "limits": [
+    "No iPhone runtime or GPU benchmark in this session; actual smoothness, memory use, menu detection and Liquid Glass appearance need device testing.",
+    "FPS counts Unity command-buffer submissions, not guaranteed display presentation rate. Resident MB includes the entire app.",
+    "Reflection is asynchronous and targets 20 or 30 FPS, not guaranteed one-to-one synchronization with every rendered game frame.",
+    "Layouts are approximate defaults from screenshots; they are not an import of device preference data.",
+    "Optional FPS overlay defaults off; drag it in the unified editor if it covers another element.",
+    "No game camera, engine code or executable-header changes added in this update; physical camera/hinge occlusion cannot be painted over."
+  ],
+  "diagnostics": [
+    "unifiedLayout",
+    "gameContext",
+    "performance",
+    "hudSafeArea",
+    "reflectionCapture",
+    "consoleStyle"
+  ],
+  "defaultLayouts": [
+    {
+      "divider": 423.75,
+      "buttons": [
+        {
+          "id": 0,
+          "name": "摇杆",
+          "rect": [
+            75.11500000000001,
+            540.6375,
+            96.75,
+            96.75
+          ]
+        },
+        {
+          "id": 1,
+          "name": "跳跃",
+          "rect": [
+            345.03000000000003,
+            545.1374999999999,
+            36.9,
+            36.9
+          ]
+        },
+        {
+          "id": 2,
+          "name": "攻击 / 确认",
+          "rect": [
+            259.99,
+            532.965,
+            76.5,
+            76.5
+          ]
+        },
+        {
+          "id": 3,
+          "name": "冲刺",
+          "rect": [
+            345.03000000000003,
+            598.53,
+            36.9,
+            36.9
+          ]
+        },
+        {
+          "id": 4,
+          "name": "缠丝",
+          "rect": [
+            215,
+            604.065,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 5,
+          "name": "技能",
+          "rect": [
+            215,
+            537.96,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 6,
+          "name": "工具",
+          "rect": [
+            364.12,
+            504.9075,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 7,
+          "name": "背包",
+          "rect": [
+            54.14999999999999,
+            466.4775,
+            31.500000000000004,
+            31.500000000000004
+          ]
+        },
+        {
+          "id": 8,
+          "name": "地图",
+          "rect": [
+            135.7,
+            466.4775,
+            31.500000000000004,
+            31.500000000000004
+          ]
+        },
+        {
+          "id": 9,
+          "name": "暂停",
+          "rect": [
+            217.25,
+            466.4775,
+            31.500000000000004,
+            31.500000000000004
+          ]
+        },
+        {
+          "id": 11,
+          "name": "返回",
+          "rect": [
+            17.28,
+            513.0775,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 12,
+          "name": "布局编辑图标",
+          "rect": [
+            298.79999999999995,
+            466.4775,
+            31.500000000000004,
+            31.500000000000004
+          ]
+        },
+        {
+          "id": 13,
+          "name": "更多",
+          "rect": [
+            380.34999999999997,
+            466.4775,
+            31.500000000000004,
+            31.500000000000004
+          ]
+        },
+        {
+          "id": 14,
+          "name": "帧率监测",
+          "rect": [
+            330,
+            431.75,
+            128,
+            32
+          ]
+        }
+      ],
+      "width": 466,
+      "profile": "外屏竖屏018",
+      "height": 678
+    },
+    {
+      "divider": 0,
+      "buttons": [
+        {
+          "id": 0,
+          "name": "摇杆",
+          "rect": [
+            86.27,
+            286.61,
+            125.78,
+            125.78
+          ]
+        },
+        {
+          "id": 1,
+          "name": "跳跃",
+          "rect": [
+            532.95,
+            263.78999999999996,
+            59.58,
+            59.58
+          ]
+        },
+        {
+          "id": 2,
+          "name": "攻击 / 确认",
+          "rect": [
+            413.045,
+            301.505,
+            95.99,
+            95.99
+          ]
+        },
+        {
+          "id": 3,
+          "name": "冲刺",
+          "rect": [
+            532.95,
+            366.30999999999995,
+            59.58,
+            59.58
+          ]
+        },
+        {
+          "id": 4,
+          "name": "缠丝",
+          "rect": [
+            344.76500000000004,
+            363.305,
+            56.27,
+            56.27
+          ]
+        },
+        {
+          "id": 5,
+          "name": "技能",
+          "rect": [
+            344.76500000000004,
+            237.485,
+            56.27,
+            56.27
+          ]
+        },
+        {
+          "id": 6,
+          "name": "工具",
+          "rect": [
+            453.24499999999995,
+            204.865,
+            56.27,
+            56.27
+          ]
+        },
+        {
+          "id": 7,
+          "name": "背包",
+          "rect": [
+            363.13000000000005,
+            25.389999999999997,
+            33.1,
+            33.1
+          ]
+        },
+        {
+          "id": 8,
+          "name": "地图",
+          "rect": [
+            420.76,
+            25.389999999999997,
+            33.1,
+            33.1
+          ]
+        },
+        {
+          "id": 9,
+          "name": "暂停",
+          "rect": [
+            478.39000000000004,
+            25.389999999999997,
+            33.1,
+            33.1
+          ]
+        },
+        {
+          "id": 11,
+          "name": "返回",
+          "rect": [
+            34.24,
+            245.62,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 12,
+          "name": "布局编辑图标",
+          "rect": [
+            536.0200000000001,
+            25.389999999999997,
+            33.1,
+            33.1
+          ]
+        },
+        {
+          "id": 13,
+          "name": "更多",
+          "rect": [
+            593.6500000000001,
+            25.389999999999997,
+            33.1,
+            33.1
+          ]
+        },
+        {
+          "id": 14,
+          "name": "帧率监测",
+          "rect": [
+            519.08,
+            77.2,
+            128,
+            32
+          ]
+        }
+      ],
+      "width": 678,
+      "profile": "外屏横屏018",
+      "height": 466
+    },
+    {
+      "divider": 613.395,
+      "buttons": [
+        {
+          "id": 0,
+          "name": "摇杆",
+          "rect": [
+            90.3625,
+            769.3928500000001,
+            140.395,
+            140.395
+          ]
+        },
+        {
+          "id": 1,
+          "name": "跳跃",
+          "rect": [
+            607.964,
+            795.062,
+            41.792,
+            41.792
+          ]
+        },
+        {
+          "id": 2,
+          "name": "攻击 / 确认",
+          "rect": [
+            449.83,
+            774.2903500000001,
+            130.6,
+            130.6
+          ]
+        },
+        {
+          "id": 3,
+          "name": "冲刺",
+          "rect": [
+            607.964,
+            875.208,
+            41.792,
+            41.792
+          ]
+        },
+        {
+          "id": 4,
+          "name": "缠丝",
+          "rect": [
+            380.50399999999996,
+            875.208,
+            41.792,
+            41.792
+          ]
+        },
+        {
+          "id": 5,
+          "name": "技能",
+          "rect": [
+            380.50399999999996,
+            774.8057,
+            41.792,
+            41.792
+          ]
+        },
+        {
+          "id": 6,
+          "name": "工具",
+          "rect": [
+            547.754,
+            720.7889,
+            41.792,
+            41.792
+          ]
+        },
+        {
+          "id": 7,
+          "name": "背包",
+          "rect": [
+            82.35,
+            673.04415,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 8,
+          "name": "地图",
+          "rect": [
+            199.42499999999998,
+            673.04415,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 9,
+          "name": "暂停",
+          "rect": [
+            316.5,
+            673.04415,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 11,
+          "name": "返回",
+          "rect": [
+            33.52,
+            738.56515,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 12,
+          "name": "布局编辑图标",
+          "rect": [
+            433.57499999999993,
+            673.04415,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 13,
+          "name": "更多",
+          "rect": [
+            550.65,
+            673.04415,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 14,
+          "name": "帧率监测",
+          "rect": [
+            511.34000000000003,
+            621.395,
+            128,
+            32
+          ]
+        }
+      ],
+      "width": 669,
+      "profile": "内屏竖屏018",
+      "height": 951
+    },
+    {
+      "divider": 0,
+      "buttons": [
+        {
+          "id": 0,
+          "name": "摇杆",
+          "rect": [
+            110.565,
+            465.07500000000005,
+            140.25,
+            140.25
+          ]
+        },
+        {
+          "id": 1,
+          "name": "跳跃",
+          "rect": [
+            883.04,
+            404.92999999999995,
+            59.84,
+            59.84
+          ]
+        },
+        {
+          "id": 2,
+          "name": "攻击 / 确认",
+          "rect": [
+            716.8675,
+            429.2875,
+            144.925,
+            144.925
+          ]
+        },
+        {
+          "id": 3,
+          "name": "冲刺",
+          "rect": [
+            883.04,
+            572.1800000000001,
+            59.84,
+            59.84
+          ]
+        },
+        {
+          "id": 4,
+          "name": "缠丝",
+          "rect": [
+            635.78,
+            558.8000000000001,
+            59.84,
+            59.84
+          ]
+        },
+        {
+          "id": 5,
+          "name": "技能",
+          "rect": [
+            635.78,
+            378.1699999999999,
+            59.84,
+            59.84
+          ]
+        },
+        {
+          "id": 6,
+          "name": "工具",
+          "rect": [
+            768.92,
+            331.34000000000003,
+            59.84,
+            59.84
+          ]
+        },
+        {
+          "id": 7,
+          "name": "背包",
+          "rect": [
+            513.5600000000001,
+            41.21,
+            38,
+            38
+          ]
+        },
+        {
+          "id": 8,
+          "name": "地图",
+          "rect": [
+            594.395,
+            41.21,
+            38,
+            38
+          ]
+        },
+        {
+          "id": 9,
+          "name": "暂停",
+          "rect": [
+            675.2300000000001,
+            41.21,
+            38,
+            38
+          ]
+        },
+        {
+          "id": 11,
+          "name": "返回",
+          "rect": [
+            56.08,
+            361.33,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 12,
+          "name": "布局编辑图标",
+          "rect": [
+            756.065,
+            41.21,
+            38,
+            38
+          ]
+        },
+        {
+          "id": 13,
+          "name": "更多",
+          "rect": [
+            836.9000000000001,
+            41.21,
+            38,
+            38
+          ]
+        },
+        {
+          "id": 14,
+          "name": "帧率监测",
+          "rect": [
+            753.86,
+            117.80000000000001,
+            128,
+            32
+          ]
+        }
+      ],
+      "width": 951,
+      "profile": "内屏横屏018",
+      "height": 669
+    },
+    {
+      "divider": 495.5,
+      "buttons": [
+        {
+          "id": 0,
+          "name": "摇杆",
+          "rect": [
+            93.94750000000003,
+            743.4675000000001,
+            159.98499999999999,
+            159.98499999999999
+          ]
+        },
+        {
+          "id": 1,
+          "name": "跳跃",
+          "rect": [
+            600.7810000000001,
+            758.941,
+            56.157999999999994,
+            56.157999999999994
+          ]
+        },
+        {
+          "id": 2,
+          "name": "攻击 / 确认",
+          "rect": [
+            471.21250000000003,
+            763.7425000000001,
+            101.215,
+            101.215
+          ]
+        },
+        {
+          "id": 3,
+          "name": "冲刺",
+          "rect": [
+            600.7810000000001,
+            854.596,
+            56.157999999999994,
+            56.157999999999994
+          ]
+        },
+        {
+          "id": 4,
+          "name": "缠丝",
+          "rect": [
+            393.3910000000001,
+            854.596,
+            56.157999999999994,
+            56.157999999999994
+          ]
+        },
+        {
+          "id": 5,
+          "name": "技能",
+          "rect": [
+            406.7710000000001,
+            713.3910000000001,
+            56.157999999999994,
+            56.157999999999994
+          ]
+        },
+        {
+          "id": 6,
+          "name": "工具",
+          "rect": [
+            507.12100000000004,
+            667.841,
+            56.157999999999994,
+            56.157999999999994
+          ]
+        },
+        {
+          "id": 7,
+          "name": "背包",
+          "rect": [
+            82.35,
+            582.265,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 8,
+          "name": "地图",
+          "rect": [
+            199.42499999999998,
+            582.265,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 9,
+          "name": "暂停",
+          "rect": [
+            316.5,
+            582.265,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 11,
+          "name": "返回",
+          "rect": [
+            33.52,
+            671.365,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 12,
+          "name": "布局编辑图标",
+          "rect": [
+            433.57499999999993,
+            582.265,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 13,
+          "name": "更多",
+          "rect": [
+            550.65,
+            582.265,
+            36,
+            36
+          ]
+        },
+        {
+          "id": 14,
+          "name": "帧率监测",
+          "rect": [
+            511.34000000000003,
+            506.83000000000004,
+            128,
+            32
+          ]
+        }
+      ],
+      "width": 669,
+      "profile": "半折叠018",
+      "height": 951
+    }
+  ],
+  "changedEntries": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "preservedComponentSHA256": {
+    "Payload/SilksongNative.app/Frameworks/UnityFramework.framework/UnityFramework": "a00298a2c10dbb3d891141564e22c7100abdaff4750561f8866f6e85df391cb0",
+    "Payload/SilksongNative.app/Frameworks/TouchControls.dylib": "c4b6256a2e604b864a870f2efd21b4e64c5515b739afc3af4aec1bd4f6fb24e5",
+    "Payload/SilksongNative.app/TouchKeys.json": "ef363d46a6f17c88dafaaf5be64513856378c9eb81d8048c60119eec1f2464f5"
+  },
+  "sha256": "39bca4be1dfc745d11f8b73517059771220cbc39c6c595087fbdc15d704960ea"
+}

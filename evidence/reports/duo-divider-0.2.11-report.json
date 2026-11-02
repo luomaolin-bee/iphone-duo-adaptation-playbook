@@ -1,0 +1,29 @@
+{
+  "source": "SilksongNative-0.8.2-unsigned-duo-stability-camera-0.2.10.ipa",
+  "output": "SilksongNative-0.8.2-unsigned-duo-divider-0.2.11.ipa",
+  "changed": [
+    "Payload/SilksongNative.app/Frameworks/UnityFramework.framework/UnityFramework",
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "portraitDivider": {
+    "outer": 0.625,
+    "inner": 0.645,
+    "units": "fraction of actual window height"
+  },
+  "folded": "Retains active system hinge boundary",
+  "camera": "Minimum aspect bound 4:3 -> 1:2 to permit taller viewport without stretching; actual-render-size patch from 0.2.10 retained",
+  "ui": "All controls including settings/bag/map/pause placed below portrait divider. Compact controls resized for shorter lower deck.",
+  "checks": [
+    "Strict compile",
+    "Clang analyzer zero diagnostics",
+    "Control separation for both annotated portrait sizes",
+    "Engine differs from 0.2.10 by only 8 instruction bytes",
+    "ZIP integrity"
+  ],
+  "unverified": [
+    "On-device framing",
+    "World/camera/UI behavior with taller aspect",
+    "Touch stability and controller input"
+  ],
+  "sha256": "46053791a6be961a81b386c7f0400152d58257cd3cf5386f0a4e070eaf2ce379"
+}

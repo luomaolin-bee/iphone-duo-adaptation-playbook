@@ -1,0 +1,67 @@
+{
+  "version": "0.2.19",
+  "output": "SilksongNative-0.8.2-unsigned-duo-fakelu-0.2.19.ipa",
+  "baseline": "SilksongNative-0.8.2-unsigned-duo-unified-layout-0.2.18.ipa",
+  "status": "Unsigned test build; 0.2.18 user-verified; 0.2.19 pending iPhone runtime verification.",
+  "changes": [
+    "Preserved game engine, launcher, binding codes, display geometry, render-resolution synchronization and gameplay input path from 0.2.18.",
+    "Retained 0.2.18 profile names and preferences; all 65 default non-monitor rectangles unchanged. Only monitor coordinates migrate to the full-screen coordinate space.",
+    "Monitor can move above the deck and has shortcuts for game top-right / deck top-right. No monitor selection outline or dashed border.",
+    "Monitor: presented FPS when available, explicit submitted-FPS fallback, average frame interval, process CPU percentage, sampled presenting-command GPU time, actual drawable resolution, physical footprint, thermal state and reflection FPS/latency.",
+    "Process CPU and memory sampled at 1 Hz only when monitoring/editor enabled. GPU timestamps sampled every fourth presenting command only when enabled; no frame-history storage.",
+    "Context transitions, inventory pane and player input-acceptance changes trigger finite water ripple / opacity reveal. Secondary menu button presses also trigger decorative reveal.",
+    "Read-only combined normal/blue health detects damage or healing with pause/loading/scene-stability/cooldown guards; currency changes produce a light interaction signal.",
+    "Damage red breathing edge uses four narrow gradient strips, not a fullscreen image. Three ripple shapes rasterize at 64x64; existing gather has 18 tiny dots. All animations finite; reduced-motion respected.",
+    "More menu includes a feedback on/off switch.",
+    "Exact logo object names recovered from supplied resource archive: 1 - Team Cherry Logo and TeamCherryLogo. Visual scale suppressed without deactivating their controllers or altering scene progression.",
+    "User-provided Fake Lu artwork bundled unchanged. Native 720px thumbnail intro uses finite fade/type reveal, cyan-magenta glitch bars, horizontal stutter and alternating eye dimming; thumbnail released after intro. Title screen uses a small Fake Lu label."
+  ],
+  "verified": [
+    "Strict arm64 iOS build with warnings treated as errors",
+    "Clang static analyzer: zero diagnostics",
+    "70 full-width drag checks, full-screen monitor movement, five independent profiles and persistence",
+    "All 14 default editable rectangles non-overlapping across five representative modes",
+    "65 non-monitor default rectangles identical to 0.2.18",
+    "1108 feedback policy cases plus invalid-health guards, covering menu/pause/loading/scene change/cooldown/death/health increase and decrease",
+    "Darwin self-task CPU-clock test: ~0.250s CPU over ~0.250s busy wall time; resident and physical-footprint queries succeeded",
+    "Exact engine UUID gate and three new typed branding call signatures checked against engine symbols and ARM64 disassembly",
+    "Startup/title logo names confirmed in decoded UnityFS scene resources",
+    "ZIP integrity, only bridge replacement and one artwork addition"
+  ],
+  "limits": [
+    "No iPhone runtime, actual GPU timing test or screenshot of new effects available in this session. Device stability, event coverage, visual result and performance require installation testing.",
+    "Thermal state is a system severity level, not a Celsius sensor reading.",
+    "CPU 100% means one fully occupied core; a multithreaded process may exceed 100%. It is this app process, not whole-device CPU utilization.",
+    "GPU milliseconds measure sampled completed presenting-command execution including added reflection work; they are not whole-device GPU utilization percentages.",
+    "Frame milliseconds are the mean presented/submitted frame interval. Render shows the Metal drawable pixel dimensions.",
+    "Damage feedback follows health samples at nominal 200ms intervals, with a one-second stable-scene guard; it does not read every engine hit event.",
+    "Shop or other UI transition coverage depends on whether scene/UI/input state changes are exposed by this build. Unknown states do not invoke game UI functions.",
+    "Branding targets the identified intro and title logo objects. Other resource-pack variants may use different names; diagnostic branding match counters expose misses.",
+    "Original assets, legal notices and game flow remain unchanged; the requested identified logo visuals are suppressed at runtime."
+  ],
+  "diagnostics": [
+    "performance",
+    "feedback",
+    "gameContext",
+    "branding",
+    "unifiedLayout",
+    "reflectionCapture"
+  ],
+  "nativeBrandingAddresses": {
+    "engineUUID": "ad0a91df-b78c-38bc-8fb7-0aeba6d2b6a5",
+    "GameObject.Find": "0x91881d4",
+    "GameObject.transform": "0x9185bc8",
+    "Transform.localScale.setter": "0x91bd748"
+  },
+  "references": [
+    "https://developer.apple.com/documentation/metal/mtlcommandbuffer/gpustarttime",
+    "https://developer.apple.com/documentation/foundation/processinfo/thermalstate-swift.property"
+  ],
+  "changedEntries": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "addedEntries": [
+    "Payload/SilksongNative.app/FakeLuStudio.jpg"
+  ],
+  "sha256": "b49d6f9d5ebde9b308e4484fd675e3d9ec5581e68086f28b0ae9ebedae11a2e8"
+}

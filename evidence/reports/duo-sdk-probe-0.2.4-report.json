@@ -1,0 +1,18 @@
+{
+  "source": "SilksongNative-0.8.2-unsigned-duo-fullscreen-test-0.2.3.ipa",
+  "output": "SilksongNative-0.8.2-unsigned-duo-sdk-probe-0.2.4.ipa",
+  "changes": [
+    {
+      "entry": "Payload/SilksongNative.app/Unity-iPhone",
+      "sdk_before": "26.5.0",
+      "sdk_after": "27.1.0",
+      "bytes_changed": 2,
+      "before_sha256": "0978a65752ebdb63c87322c593f0bb59dbca0a3ec4c22bc65d074150c50ad44e",
+      "after_sha256": "2a299e35a0f9e491a490f90caeb1ec6ca790af083b0dee7071bb03966409134e"
+    }
+  ],
+  "verification": "All archive entries preserved; only launcher differs; ZIP CRC check passed.",
+  "signing": "Unsigned experimental IPA. Existing code signature invalidated by modification; re-sign app and nested code before installation.",
+  "scope": "UnityFramework, Info.plist, TouchControls.dylib and game resources unchanged. SDK marker modification is not an SDK rebuild.",
+  "output_sha256": "88b0a8dd348e1a47e6c1ff285a4482fec7ee05a1b1436cf312b35f10fa3c9f5f"
+}

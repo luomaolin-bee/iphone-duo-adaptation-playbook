@@ -1,0 +1,186 @@
+{
+  "output": "SilksongNative-0.8.2-unsigned-duo-console-glass-0.2.17.ipa",
+  "source": "SilksongNative-0.8.2-unsigned-duo-aspect-input-0.2.16.ipa",
+  "status": "unsigned test build; user confirmed 0.2.16 picture baseline; 0.2.17 not device-tested",
+  "scope": [
+    "Only bridge dylib changed; launcher, engine, touch library, binding JSON and game assets byte-for-byte retained",
+    "Game resolution synchronization and joystick input mapping source preserved",
+    "Left-camera outer-landscape HUD stats groups shifted using their HUD camera screen-space scale; original local X restored on posture change",
+    "GPU bilinear downsample + Gaussian blur before small readback; one cached resource set and one frame in flight; no full-frame CPU copy",
+    "Live reflection on all split console layouts, target 30 FPS / 20 low power / 10 elevated thermal; asynchronous, not frame-locked",
+    "Vector console bezel, etched corners, enamel texture, shoulder grille and six non-overlapping gameplay buttons",
+    "Public UIGlassEffect on iOS26+, visual-only noninteractive faces; persistent on/off switch in More; keyboard hit testing retained"
+  ],
+  "controls": {
+    "source": "0.2.16 TouchKeys.json (unchanged) and original compiled default keyboard table",
+    "existingVirtualKeys": [
+      {
+        "label": "跳跃",
+        "code": 29,
+        "column": 1,
+        "row": 0
+      },
+      {
+        "label": "攻击",
+        "code": 27,
+        "column": 0,
+        "row": 1
+      },
+      {
+        "label": "冲刺",
+        "code": 6,
+        "column": 0,
+        "row": 0
+      },
+      {
+        "label": "缠丝",
+        "code": 4,
+        "column": 2,
+        "row": 1
+      },
+      {
+        "label": "技能",
+        "code": 22,
+        "column": 1,
+        "row": 1
+      },
+      {
+        "label": "工具",
+        "code": 7,
+        "column": 2,
+        "row": 0
+      },
+      {
+        "label": "背包",
+        "code": 43,
+        "column": 2,
+        "row": 2
+      },
+      {
+        "label": "地图",
+        "code": 16,
+        "column": 1,
+        "row": 2
+      },
+      {
+        "label": "暂停",
+        "code": 41,
+        "column": 0,
+        "row": 2
+      },
+      {
+        "label": "确认",
+        "code": 40,
+        "column": 3,
+        "row": 2
+      }
+    ],
+    "defaultInternalKeyboardActions": [
+      {
+        "internalAction": "Jump",
+        "inControlKeyEnum": 61
+      },
+      {
+        "internalAction": "Attack",
+        "inControlKeyEnum": 59
+      },
+      {
+        "internalAction": "Dash",
+        "inControlKeyEnum": 38
+      },
+      {
+        "internalAction": "Cast",
+        "inControlKeyEnum": 36
+      },
+      {
+        "internalAction": "Super Dash",
+        "inControlKeyEnum": 54
+      },
+      {
+        "internalAction": "Dream Nail",
+        "inControlKeyEnum": 39
+      },
+      {
+        "internalAction": "Quick Map",
+        "inControlKeyEnum": 66
+      },
+      {
+        "internalAction": "openInventory",
+        "inControlKeyEnum": 44
+      },
+      {
+        "internalAction": "openInventoryMap",
+        "inControlKeyEnum": 48
+      },
+      {
+        "internalAction": "openInventoryJournal",
+        "inControlKeyEnum": 45
+      },
+      {
+        "internalAction": "openInventoryTools",
+        "inControlKeyEnum": 52
+      },
+      {
+        "internalAction": "openInventoryQuests",
+        "inControlKeyEnum": 55
+      },
+      {
+        "internalAction": "Quick Cast",
+        "inControlKeyEnum": 41
+      },
+      {
+        "internalAction": "Taunt",
+        "inControlKeyEnum": 57
+      },
+      {
+        "internalAction": "Up",
+        "inControlKeyEnum": 85
+      },
+      {
+        "internalAction": "Down",
+        "inControlKeyEnum": 86
+      },
+      {
+        "internalAction": "Left",
+        "inControlKeyEnum": 83
+      },
+      {
+        "internalAction": "Left",
+        "inControlKeyEnum": 84
+      },
+      {
+        "internalAction": "Left",
+        "inControlKeyEnum": 1
+      }
+    ],
+    "policy": "Existing gameplay HID codes preserved; Skill/Tool exposed by default; Attack-confirm and dedicated Escape-back retained from 0.2.16. Internal action names are legacy names and are not automatically relabelled."
+  },
+  "verified": [
+    "Strict iOS bridge compile, warnings treated as errors",
+    "Clang analyzer zero diagnostics",
+    "75 collision checks over five representative control areas",
+    "1000 stable HUD offset iterations, restoration and game-layout reset checks",
+    "Shared vector drawing rendered and inspected in native macOS preview",
+    "Host Metal/MPS test compiled",
+    "Archive integrity and sole bridge changed-entry check"
+  ],
+  "limits": [
+    "Host Metal device unavailable (test returned 77); GPU encoding and actual reflection FPS not run on device",
+    "HUD object hierarchy and offset need device verification; absent targets are reported and not guessed",
+    "System Liquid Glass appearance and touch behavior require iPhone test",
+    "Preview shows common layout/vector code, not a device screenshot or native glass rendering"
+  ],
+  "diagnostics": [
+    "hudSafeArea.status/movedGroups/hudHierarchy/shiftPoints",
+    "reflectionCapture.deliveredFPS/targetFPS/latencyMS/readbackBytes",
+    "consoleStyle.glassEnabled"
+  ],
+  "references": [
+    "https://developer.apple.com/documentation/metalperformanceshaders/the-mpskernel-class",
+    "https://developer.apple.com/videos/play/wwdc2025/284/"
+  ],
+  "changedEntries": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "sha256": "3963ae96bda04c32ce4cd07b30fb0d9e48dc61a2a2f8d7dc1738e5953ef818d4"
+}

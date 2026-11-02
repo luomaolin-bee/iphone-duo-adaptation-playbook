@@ -1,0 +1,124 @@
+{
+  "output": "SilksongNative-0.8.2-unsigned-duo-aspect-input-0.2.16.ipa",
+  "source": "SilksongNative-0.8.2-unsigned-duo-picture-only-0.2.15.ipa",
+  "status": "unsigned test build; not tested on the device",
+  "changes": [
+    "Portrait game visuals use full window width; control safety insets preserved",
+    "Split-only native requested-resolution orientation sorting bypassed; normal full-screen sorting preserved",
+    "Auto-correct render resolution again when external settings change the active resolution",
+    "Keyboard menu Attack replaces Jump as confirm; Attack and Cast removed from cancel; original Submit and Cancel retained",
+    "Dedicated back button upper-left of joystick, mapped to existing Escape control",
+    "Remove backup confirm entry from More menu; hidden standalone confirm remains inaccessible"
+  ],
+  "verified": [
+    "Strict compile without warnings",
+    "Clang analyzer zero diagnostics",
+    "126 ARM64 split/native resolution cases",
+    "32 combinations executed from exact patched ARM64 menu instructions",
+    "All framework changes match reviewed byte ranges",
+    "Shared state fits writable segment padding",
+    "No managed invocation, GC handles or executable header helper",
+    "ZIP integrity and exact changed-file set"
+  ],
+  "unverified": [
+    "Device startup and transitions",
+    "Actual render/camera/HUD proportionality in every posture",
+    "Back and confirm behavior on all game menus"
+  ],
+  "patch": {
+    "stateAddress": "0xd785280",
+    "stateType": "uint32 width, height, split; no handles or managed object references",
+    "patches": [
+      {
+        "offset": "0x2611100",
+        "before": "6855955248f5a772",
+        "after": "0800805208e0a772",
+        "purpose": "Permit portrait viewport ratios down to 1:2"
+      },
+      {
+        "offset": "0x26110e4",
+        "before": "000080d27053a995f60300aa000080d29653a995f70300aa",
+        "after": "a88b0590168142b9178542b91f2003d51f2003d51f2003d5",
+        "purpose": "Shared camera calculation uses viewport pixel dimensions"
+      },
+      {
+        "offset": "0x2610ef0",
+        "before": "000080d2ed53a995",
+        "after": "a88b05b0008142b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2610f04",
+        "before": "000080d21154a995",
+        "after": "a88b05b0008542b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2610f20",
+        "before": "000080d2e153a995",
+        "after": "a88b05b0008142b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2610f2c",
+        "before": "000080d20754a995",
+        "after": "a88b05b0008542b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2611ba0",
+        "before": "000080d2c150a995",
+        "after": "a88b0590008142b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2611bbc",
+        "before": "000080d2e350a995",
+        "after": "a88b0590008542b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2611bec",
+        "before": "000080d2ae50a995",
+        "after": "a88b0590008142b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x2611bf8",
+        "before": "000080d2d450a995",
+        "after": "a88b0590008542b9",
+        "purpose": "Camera resize detection/cache uses viewport dimensions"
+      },
+      {
+        "offset": "0x442adc",
+        "before": "883d069008854cb91f0500716b020054893d069029894cb93f050071eb0100540a0400515f090071eb279f1a0a0c00515f090071ea279f1a3f01086beca79f1a6c010c0a1f01096beba79f1a8c0000374a010b0a4a000035c0035fd68a3d06904a11329149210029c0035fd6",
+        "after": "0a9a06f04a010a918c3d06908c1132914b0940b94b020035882540291f050071eb0100543f050071ab0100540b0400517f090071e30000540b0c00517f090071e20000541f01096baa000054030000143f01086b4a00005489210029c0035fd61f2003d51f2003d51f2003d5",
+        "purpose": "Preserve requested viewport width/height in split mode; retain native orientation sorting otherwise"
+      },
+      {
+        "offset": "0x1d8ac10",
+        "before": "7a030037",
+        "after": "77030037",
+        "purpose": "Keyboard menu Attack confirms instead of Jump"
+      },
+      {
+        "offset": "0x1d8ac1c",
+        "before": "17030037",
+        "after": "1f2003d5",
+        "purpose": "Attack no longer cancels keyboard menus"
+      },
+      {
+        "offset": "0x1d8ac20",
+        "before": "f6020037",
+        "after": "1f2003d5",
+        "purpose": "Cast no longer cancels keyboard menus"
+      }
+    ],
+    "splitOrientationPatchBytes": 108
+  },
+  "changedEntries": [
+    "Payload/SilksongNative.app/Frameworks/UnityFramework.framework/UnityFramework",
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "sha256": "7e09a34580adb14da7e557f2abbdfec533b57132645c26a8d1e4ef0bb84c90b8"
+}

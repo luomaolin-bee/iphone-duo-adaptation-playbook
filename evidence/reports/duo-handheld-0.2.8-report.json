@@ -1,0 +1,25 @@
+{
+  "source": "SilksongNative-0.8.2-unsigned-duo-scene-probe-0.2.5.ipa",
+  "output": "SilksongNative-0.8.2-unsigned-duo-handheld-0.2.8.ipa",
+  "changed": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "behavior": [
+    "Portrait: 4:3 upper game viewport; folded: fill top panel to measured hinge boundary",
+    "Active horizontal division region: upper game area and lower controls",
+    "Unity native rendering resolution requests guarded by exact engine UUID; rendering/managed screen/Metal dimensions recorded; reflection remains experimental",
+    "New editable eight-direction joystick profiles with pointer capture/deadzone; action buttons resized; settings moved into lower deck"
+  ],
+  "verified": [
+    "Strict compilation passed",
+    "ZIP integrity passed",
+    "Only bridge differs from 0.2.5; original camera and game engine retained"
+  ],
+  "unverified": [
+    "Device startup and game rendering at constrained view bounds",
+    "Control interaction and profile persistence",
+    "Fold region reporting",
+    "Whether system snapshots include Metal contents"
+  ],
+  "sha256": "8c4f3c9eb17a26197a5b4221bd23c1560f49a50df630469b6018eab97f262b82"
+}

@@ -1,0 +1,27 @@
+{
+  "output": "SilksongNative-0.8.2-unsigned-duo-recovery-0.2.14.ipa",
+  "baseline": "SilksongNative-0.8.2-unsigned-duo-touch-ui-0.2.9.ipa",
+  "changed": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "recoveryScope": [
+    "Use the engine, launcher, scene manifest and layout from the user-tested 0.2.9 startup baseline",
+    "Remove managed UI raycast/tap invocation",
+    "No later header-code camera/menu patches",
+    "No game-state field readers or glass feedback layer",
+    "Retain the baseline controller, scene bridge and blur reflection"
+  ],
+  "verified": [
+    "Strict compile",
+    "Clang analyzer zero diagnostics",
+    "Removed path symbols absent",
+    "Engine byte-identical to 0.2.9",
+    "ZIP integrity"
+  ],
+  "unverified": [
+    "Actual cause of 0.2.13 startup crash without new .ips",
+    "On-device recovery startup",
+    "Background progress retention"
+  ],
+  "sha256": "d9748bb43e4654b97d814487774d67d1150506a6e8c30fd09d994259e95ba7f5"
+}

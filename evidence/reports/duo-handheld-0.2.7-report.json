@@ -1,0 +1,25 @@
+{
+  "source": "SilksongNative-0.8.2-unsigned-duo-scene-probe-0.2.5.ipa",
+  "output": "SilksongNative-0.8.2-unsigned-duo-handheld-0.2.7.ipa",
+  "changed": [
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "behavior": [
+    "Portrait: 16:9 upper game viewport and lower controller deck",
+    "Active horizontal division region: upper game area and lower controls",
+    "Dark gradient, divider and faint vertically reflected system snapshot refreshed every 1.5 seconds while foreground",
+    "Independent editable portrait/folded control profiles retain existing drawing and input logic"
+  ],
+  "verified": [
+    "Strict compilation passed",
+    "ZIP integrity passed",
+    "Only bridge differs from 0.2.5; original camera and game engine retained"
+  ],
+  "unverified": [
+    "Device startup and game rendering at constrained view bounds",
+    "Control interaction and profile persistence",
+    "Fold region reporting",
+    "Whether system snapshots include Metal contents"
+  ],
+  "sha256": "f528eae83631a53565343d656c531a0b070d6b4e03aebae5942999d6d5d4d272"
+}

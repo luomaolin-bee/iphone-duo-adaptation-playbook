@@ -1,0 +1,31 @@
+{
+  "source": "SilksongNative-0.8.2-unsigned-duo-scene-probe-0.2.5.ipa",
+  "output": "SilksongNative-0.8.2-unsigned-duo-portrait-fold-0.2.6.ipa",
+  "changes": [
+    "Payload/SilksongNative.app/Frameworks/UnityFramework.framework/UnityFramework",
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "cameraPatch": {
+    "method": "ForceCameraAspect.AutoScaleViewportShared",
+    "virtualAddress": "0x2611100",
+    "oldInstructionsHex": "6855955248f5a772",
+    "newInstructionsHex": "0800805208e0a772",
+    "minimumAspectBefore": 1.3333333333333333,
+    "minimumAspectAfter": 0.5,
+    "retained": "Original upper ratio bound, viewport calculation and camera height scaling"
+  },
+  "foldLayout": "Active horizontal UIKit division region defines upper game viewport and lower touch-control area. No size-only or hardcoded hinge inference. Diagnostics include hinge status, angle and division regions.",
+  "verified": [
+    "Strict compiler warnings passed",
+    "Archive CRC check passed",
+    "Engine differs only within specified 8-byte instruction pair",
+    "Launcher, scene manifest, TouchControls and resources unchanged from 0.2.5"
+  ],
+  "unverified": [
+    "Device startup",
+    "Portrait gameplay, HUD and menu layout",
+    "Half-fold game render resizing and lower controls",
+    "Foreground/background and rotation transitions"
+  ],
+  "sha256": "62bab1c6fa983ebb70fe75832af099a62a61c44afe81a96bd47aa182e79e6ba8"
+}

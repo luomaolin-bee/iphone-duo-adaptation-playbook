@@ -1,0 +1,56 @@
+{
+  "source": "SilksongNative-0.8.2-unsigned-duo-glass-feedback-0.2.12.ipa",
+  "output": "SilksongNative-0.8.2-unsigned-duo-menu-resume-0.2.13.ipa",
+  "changed": [
+    "Payload/SilksongNative.app/Frameworks/UnityFramework.framework/UnityFramework",
+    "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+  ],
+  "nativeMenuPatch": {
+    "helperStart": "0x1900",
+    "helperLength": 256,
+    "stateWord": "0xd785280",
+    "calls": [
+      {
+        "site": "0x21807d4",
+        "oldTarget": "0x217e480",
+        "newTarget": "0x1900"
+      },
+      {
+        "site": "0x2190c6c",
+        "oldTarget": "0x21908bc",
+        "newTarget": "0x1980"
+      }
+    ],
+    "coverage": [
+      "MenuButton.OnPointerClick",
+      "PauseMenuButton.OnPointerClick"
+    ],
+    "behavior": "First click retains native selection; second click on same button submits. Other button types unchanged."
+  },
+  "navigation": "Attack remaps to original confirm binding only in recognized menu context. Separate virtual confirm and More confirm removed. Blank-return gesture restricted to dedicated lower control deck and recognized menus, with debounce.",
+  "background": [
+    "Pause bridge timer and clear held inputs on resign-active",
+    "Release reflection image, glass views, particles and CI caches",
+    "No full NSData copy of GPU readback buffer",
+    "Skip reflection under process-memory pressure",
+    "Restore bridge timer and controls on activation",
+    "Persist process-session/lifecycle/memory diagnostics only; game saves are not modified"
+  ],
+  "verified": [
+    "Strict compile",
+    "Clang analyzer zero diagnostics",
+    "ARM64 native gate executed on Mac with mock GC/submit: same-item second click, changed selection and menu/pause paths",
+    "Engine modification scope and decoded call targets",
+    "ZIP integrity"
+  ],
+  "unverified": [
+    "On-device startup and native menu selection/highlight",
+    "Other inventory item types",
+    "Menu-context state coverage",
+    "Return outside the actual menu panel in landscape",
+    "Cause of prior cold restarts and whether resource reduction prevents them"
+  ],
+  "sha256": "8ee5f7eb1916d6bf7fab24238c9ccd97d56cc3912593189a347a84c645a1e322",
+  "status": "withdrawn",
+  "withdrawalReason": "Incorrect 32-bit GCHandle declarations/storage in pointer-handle IL2CPP build; do not use these released artifacts. Working sources audited; recovery 0.2.14 excludes these paths."
+}
