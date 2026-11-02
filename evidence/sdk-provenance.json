@@ -1,0 +1,30 @@
+{
+  "sdk_name": "iPhoneOS27.2.sdk",
+  "source": "Local Xcode SDK headers used to compile this case, not an independent device/product specification",
+  "headers": [
+    {
+      "path_relative_to_sdk": "System/Library/Frameworks/UIKit.framework/Headers/UIViewReservedRegion.h",
+      "sha256": "e245a0c635645ccc50c0f19a90d7b259b36195b80a9dd1addd95de2dad2505ec"
+    },
+    {
+      "path_relative_to_sdk": "System/Library/Frameworks/UIKit.framework/Headers/UIView.h",
+      "sha256": "2aae4a51d9eff2298dd550871e53a2263cbb7a0d4721323c2d74f9d40b672f01"
+    },
+    {
+      "path_relative_to_sdk": "System/Library/Frameworks/UIKit.framework/Headers/UIHingeInteraction.h",
+      "sha256": "c24b3add564134e4710369cc32e363687d63a4c7454f30d276959597d9793308"
+    },
+    {
+      "path_relative_to_sdk": "System/Library/Frameworks/UIKit.framework/Headers/UIGlassEffect.h",
+      "sha256": "99154caf4718f4c98cdb77d4cb8e7872728393d6e4f864f8ceeb81fe893384b2"
+    },
+    {
+      "path_relative_to_sdk": "System/Library/Frameworks/Metal.framework/Headers/MTLCommandBuffer.h",
+      "sha256": "d84dda866f07ffc37ce68e3c635177373cdefa419fc1f64c766442ed81966895"
+    },
+    {
+      "path_relative_to_sdk": "System/Library/Frameworks/Foundation.framework/Headers/NSProcessInfo.h",
+      "sha256": "9a0afc4ec2f1ffd7b5c4c7d1ab1a0cc40f321239a68b80a3624a764a15c7c5b3"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "recorded_at": "2026-11-02",
+  "strict_compile": {
+    "sdk_version": "27.2",
+    "strict_compile": true,
+    "analyzer_diagnostics": 0,
+    "output": "build/DuoSceneBridge.dylib",
+    "device_execution_verified": false
+  },
+  "tests": {
+    "checks": [
+      "test_do_not_overwrite_baseline (test_tools.ToolsTests.test_do_not_overwrite_baseline) ... ok\ntest_malformed_command_not_accepted (test_tools.ToolsTests.test_malformed_command_not_accepted) ... ok\ntest_reject_bad_uuid (test_tools.ToolsTests.test_reject_bad_uuid) ... ok\ntest_reject_different_engine_even_with_known_archive (test_tools.ToolsTests.test_reject_different_engine_even_with_known_archive) ... ok\ntest_reject_non_macho (test_tools.ToolsTests.test_reject_non_macho) ... ok\ntest_reject_truncated_macho (test_tools.ToolsTests.test_reject_truncated_macho) ... ok\ntest_reject_unknown_baseline_before_write (test_tools.ToolsTests.test_reject_unknown_baseline_before_write) ... ok\ntest_reject_wrong_library_identity (test_tools.ToolsTests.test_reject_wrong_library_identity) ... ok\ntest_valid_package_only_bridge_and_art (test_tools.ToolsTests.test_valid_package_only_bridge_and_art) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.012s\n\nOK",
+      "Passed 70 full-width edge-drag checks; 5 independent profiles, 14 editable controls, horizontal/vertical alignment, menu/half-fold/editor policies, persistence; monitor can move above keyboard.",
+      "Passed 1108 feedback policy cases plus invalid-health guards.",
+      "Self-task CPU clock verified: 0.250s CPU / 0.250s wall; resident and physical-footprint queries succeeded.",
+      "Passed 126 ARM64 split/native orientation cases.",
+      "Passed 32 actual patched ARM64 menu-input combinations: Attack confirms, Jump/Cast neutral, Escape returns."
+    ],
+    "device_execution_verified": false
+  },
+  "actual_baseline_repack": {
+    "source_sha256": "39bca4be1dfc745d11f8b73517059771220cbc39c6c595087fbdc15d704960ea",
+    "output_sha256": "176b4cee8d93d2b50e4f07b9c97f5321bda1afcc03c5eed23279325683ee3ceb",
+    "bridge_sha256": "cb952644e61a0f853cf4f72ba6cecb7d0e24b5167820cf8206ac34af15c82baf",
+    "changed_entries": [
+      "Payload/SilksongNative.app/Frameworks/DuoSceneBridge.dylib"
+    ],
+    "added_entries": [
+      "Payload/SilksongNative.app/FakeLuStudio.jpg"
+    ],
+    "zip_integrity": true,
+    "signing": "unsigned; re-sign app and nested bridge using the existing signing process",
+    "device_execution_verified": false
+  },
+  "historical_engine_patch": {
+    "ranges": 14,
+    "input_preserved": true,
+    "output_sha256": "a00298a2c10dbb3d891141564e22c7100abdaff4750561f8866f6e85df391cb0"
+  },
+  "source_changes_from_0_2_19": "Runtime source copied unchanged; host test output path made repository-relative; new portable build/package/validation tools",
+  "device_execution_verified_by_repo_build": false
+}

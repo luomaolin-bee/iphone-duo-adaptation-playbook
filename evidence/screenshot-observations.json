@@ -1,0 +1,90 @@
+{
+  "source": "User supplied screenshots 2026-11-02; transcription of visible overlay, not a controlled benchmark",
+  "thermal_label": "正常 on all six game screenshots",
+  "observations": [
+    {
+      "screenshot": 1,
+      "label": "横屏样本 A",
+      "fps": 60,
+      "frame_ms": 16.7,
+      "cpu_percent_one_core_100": 58,
+      "gpu_sample_ms": 6.5,
+      "render_width": 2852,
+      "render_height": 2007,
+      "footprint_mb": 2112,
+      "reflection_fps": 0,
+      "reflection_latency_ms": 0
+    },
+    {
+      "screenshot": 2,
+      "label": "竖屏样本 A",
+      "fps": 60,
+      "frame_ms": 16.6,
+      "cpu_percent_one_core_100": 65,
+      "gpu_sample_ms": 6.5,
+      "render_width": 2007,
+      "render_height": 1840,
+      "footprint_mb": 2042,
+      "reflection_fps": 19,
+      "reflection_latency_ms": 8
+    },
+    {
+      "screenshot": 3,
+      "label": "上下分区样本 A",
+      "fps": 59,
+      "frame_ms": 16.9,
+      "cpu_percent_one_core_100": 52,
+      "gpu_sample_ms": 6.0,
+      "render_width": 2007,
+      "render_height": 1366,
+      "footprint_mb": 2010,
+      "reflection_fps": 19,
+      "reflection_latency_ms": 19
+    },
+    {
+      "screenshot": 4,
+      "label": "竖屏样本 B",
+      "fps": 60,
+      "frame_ms": 16.7,
+      "cpu_percent_one_core_100": 62,
+      "gpu_sample_ms": 6.9,
+      "render_width": 2007,
+      "render_height": 1840,
+      "footprint_mb": 2078,
+      "reflection_fps": 19,
+      "reflection_latency_ms": 8
+    },
+    {
+      "screenshot": 5,
+      "label": "外屏竖屏样本（按图形尺寸推断）",
+      "fps": 60,
+      "frame_ms": 16.7,
+      "cpu_percent_one_core_100": 62,
+      "gpu_sample_ms": 5.4,
+      "render_width": 1398,
+      "render_height": 1271,
+      "footprint_mb": 1981,
+      "reflection_fps": 20,
+      "reflection_latency_ms": 7
+    },
+    {
+      "screenshot": 6,
+      "label": "横屏样本 B",
+      "fps": 60,
+      "frame_ms": 16.7,
+      "cpu_percent_one_core_100": 63,
+      "gpu_sample_ms": 6.4,
+      "render_width": 2034,
+      "render_height": 1398,
+      "footprint_mb": 2005,
+      "reflection_fps": 4,
+      "reflection_latency_ms": 5
+    }
+  ],
+  "limits": [
+    "Orientation/mode labels inferred where no metadata accompanies image. Screenshots are not diagnostic JSON.",
+    "Reflection FPS 0/4 in landscape can be stale or capture off; it does not prove sustained landscape reflection.",
+    "Approximately 1.98–2.11GB is whole-app footprint, not bridge-only RAM.",
+    "These frames do not verify damage/healing/branding animation or long-session/background behavior."
+  ]
+}
