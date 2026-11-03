@@ -2,9 +2,9 @@
 
 ## 已读取本地证据
 
-- 仓库原docs及README：上一项目README、复盘、几何、性能与迁移说明；最后用户截图依据0.2.19。
-- 作者本地work/duo-0221/PROJECT_STATE.json（本次未上传）：当前声明源码0.2.20；不能按目录名推断0.2.21。其source_device_verified=false，最后用户验证0.2.19。
-- 作者本地卡比v15 UI快照（本次未上传）：v15 UI参考快照；并非独立SDK，也不包含完整游戏构建链。
+- references/previous-project：上一项目README、复盘、几何、性能与迁移说明；最后用户截图依据0.2.19。
+- ../../work/duo-0221/PROJECT_STATE.json：当前声明源码0.2.20；不能按目录名推断0.2.21。其source_device_verified=false，最后用户验证0.2.19。
+- references/kirby-v15-ui：v15 UI参考快照；并非独立SDK，也不包含完整游戏构建链。
 - GUIDE.md、PROJECT_STATE.json：本次卡比构建身份、诊断路径、具体经验与未完成项。
 
 ## GitHub现场检查

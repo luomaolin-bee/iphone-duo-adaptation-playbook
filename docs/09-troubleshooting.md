@@ -1,5 +1,12 @@
 # 故障排查与失败经验
 
+## 双案例复用更新 · 指南1.2
+
+新增双案例排查：转场退出先区分Jetsam/崩溃/后台，核对包hash和UUID；孔位整列黑边检查safeArea是否误作游戏裁切；右下角检查外框与反馈是否共用非对称路径；黄色膜检查父层、圆角mask、模型opacity和动画回收；反馈迟缓检查采样、防抖、基线被布局反复清空及事件来源；CPU高频yield定位原始调用方后再改调度。详细[错误反例](porting-standard/ANTI_PATTERNS.md)与[验收矩阵](porting-standard/ACCEPTANCE.md)。
+
+以下保留丝之歌0.2.19原案例内容；其参数和ABI不自动适用于卡比或其他游戏。
+
+
 | 症状 | 先看什么 | 本案例经验 |
 | --- | --- | --- |
 | 总是375×667/667×375 | Info、scene、实际window bounds、launcher身份 | 改plist没有改变窗口；SDK标记试验也不是重建 |

@@ -1,0 +1,97 @@
+{
+  "date": "2026-11-02",
+  "source": "Five original JPEG screenshots supplied by user for README final gallery",
+  "images": [
+    {
+      "image": "assets/screenshots/kirby/01.jpg",
+      "sha256": "400ac7afbf0903d4a56f0601a718c3ce2af25e714b81fd99186dca9bb391481a",
+      "pixels": [
+        879,
+        1280
+      ],
+      "mode_label": "外屏竖向掌机",
+      "mode_confidence": "inferred from aspect ratio, hinge depiction and user context, not runtime geometry",
+      "fps_display": 59,
+      "cpu_display_percent": 36,
+      "thermal_label": "正常",
+      "battery_display_percent": 35,
+      "scene": "title menu",
+      "binary_version": "not supplied; associated with current Kirby final-series feedback, not proven by UUID/hash",
+      "performance_validation": false
+    },
+    {
+      "image": "assets/screenshots/kirby/02.jpg",
+      "sha256": "61cb15ccae214833a677d8894d286da20457ea4023ab7878ed67c539e880bfcd",
+      "pixels": [
+        1280,
+        879
+      ],
+      "mode_label": "外屏横向叠键",
+      "mode_confidence": "inferred from aspect ratio, hinge depiction and user context, not runtime geometry",
+      "fps_display": 0,
+      "cpu_display_percent": 0,
+      "thermal_label": "正常",
+      "battery_display_percent": 35,
+      "scene": "title menu",
+      "binary_version": "not supplied; associated with current Kirby final-series feedback, not proven by UUID/hash",
+      "performance_validation": false
+    },
+    {
+      "image": "assets/screenshots/kirby/03.jpg",
+      "sha256": "db0e98e8dfe3d8fc2d0c9e1b38e60cd9621856b9e582441c36a8ea3b75e4ea49",
+      "pixels": [
+        900,
+        1280
+      ],
+      "mode_label": "内屏半折叠／上下分区",
+      "mode_confidence": "inferred from aspect ratio, hinge depiction and user context, not runtime geometry",
+      "fps_display": 60,
+      "cpu_display_percent": 54,
+      "thermal_label": "正常",
+      "battery_display_percent": 35,
+      "scene": "title menu",
+      "binary_version": "not supplied; associated with current Kirby final-series feedback, not proven by UUID/hash",
+      "performance_validation": false
+    },
+    {
+      "image": "assets/screenshots/kirby/04.jpg",
+      "sha256": "17fe263f3b6d067652098c1f621076ef191ae09caf6e5b61f773f57ee914185e",
+      "pixels": [
+        900,
+        1280
+      ],
+      "mode_label": "内屏竖向掌机",
+      "mode_confidence": "inferred from aspect ratio, hinge depiction and user context, not runtime geometry",
+      "fps_display": 0,
+      "cpu_display_percent": 0,
+      "thermal_label": "正常",
+      "battery_display_percent": 35,
+      "scene": "title menu",
+      "binary_version": "not supplied; associated with current Kirby final-series feedback, not proven by UUID/hash",
+      "performance_validation": false
+    },
+    {
+      "image": "assets/screenshots/kirby/05.jpg",
+      "sha256": "85997181c6ff0c20b149b2d9d56fd9c75348b9264cfd992f22453d3314dbdf23",
+      "pixels": [
+        1280,
+        900
+      ],
+      "mode_label": "内屏横向叠键",
+      "mode_confidence": "inferred from aspect ratio, hinge depiction and user context, not runtime geometry",
+      "fps_display": 60,
+      "cpu_display_percent": 36,
+      "thermal_label": "温热",
+      "battery_display_percent": 35,
+      "scene": "title menu",
+      "binary_version": "not supplied; associated with current Kirby final-series feedback, not proven by UUID/hash",
+      "performance_validation": false
+    }
+  ],
+  "limitations": [
+    "Title scenes only",
+    "No new runtime geometry/UUID/hash",
+    "Zero readings cannot prove performance failure or success",
+    "No timing/long-session energy evidence"
+  ]
+}

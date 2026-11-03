@@ -1,5 +1,12 @@
 # 架构和代码地图
 
+## 双案例复用更新 · 指南1.2
+
+共享模块为GeometryProvider → picture/controls布局 → InputAdapter → GameStateAdapter → bounded FeedbackRenderer → Metrics。丝之歌以Unity桥接协调scene、surface、viewport；卡比以nxnative宿主、Horizon服务与NVN→Metal资源链为运行基底。状态适配器分别是经核实托管字段与试验性HUD识别，不能交换固定地址。仓库实现仍仅含丝之歌，卡比赛例见[cases/kirby.md](cases/kirby.md)。
+
+以下保留丝之歌0.2.19原案例内容；其参数和ABI不自动适用于卡比或其他游戏。
+
+
 ```mermaid
 flowchart TD
     S[UIWindowScene / 生命周期] --> G[窗口 bounds + reserved regions]

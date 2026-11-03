@@ -1,94 +1,75 @@
-# iPhone Duo 游戏适配开发手册
+# iPhone Duo 游戏移植与适配开发手册
 
-**Fake Lu · Duo Adaptation Playbook**
+**Fake Lu · Duo Adaptation Playbook · 指南 1.2**
 
-> 一个从已有 Unity iOS IPA 出发，为折叠设备补齐窗口、画面比例、虚拟摇杆、掌机控制区和诊断功能的实际案例。当前归档版本：**0.2.19**。整理日期：**2026-11-02**。
+从《丝之歌》的已有原生 iOS IPA 设备适配，到《星之卡比 Wii 豪华版》的原始游戏文件构建：记录两条不同路线的正确目标、故障证据、Duo 五形态布局和可复用交互机制。
 
-这份仓库既是项目复盘，也是下次交给 AI 的工作记忆。先读 [AI_HANDOFF.md](AI_HANDOFF.md)，再看 [PROJECT_STATE.json](PROJECT_STATE.json) 和 [架构说明](docs/02-architecture.md)。
+**先读 [执行标准](docs/porting-standard/STANDARD.md)，再看 [错误做法](docs/porting-standard/ANTI_PATTERNS.md)和[验收矩阵](docs/porting-standard/ACCEPTANCE.md)。** 开始新游戏时重新提取它自己的视觉元素，复用坐标、事件接口、效果预算和诊断方法。
 
-## 跨项目移植标准（丝之歌＋卡比）
+## 最终效果：卡比掌机风格
 
-新增 [标准方案 1.1](docs/porting-standard/README.md)：区分已有原生IPA设备适配与原始游戏文件构建，包含Duo五形态几何、错误反例、轻量反馈、CPU/GPU/内存诊断与逐项验收。复用机制，按目标游戏提取视觉元素。本目录原丝之歌源码与历史基线仍为0.2.19；跨项目指南不覆盖原工程状态。
+以下五张为用户本轮提供的最新效果图，原图原样保留。形态标签由比例和界面分区推断，不替代运行时几何报告；截图未附包hash，不能独立确认具体二进制版本。
 
-## 最终效果
+| 外屏竖向掌机 | 内屏竖向掌机 | 半折叠／上下分区 |
+|---|---|---|
+| ![卡比外屏竖向](assets/screenshots/kirby/01.jpg) | ![卡比内屏竖向](assets/screenshots/kirby/04.jpg) | ![卡比上下分区](assets/screenshots/kirby/03.jpg) |
 
-| 内屏横向 | 外屏横向 |
-| --- | --- |
-| ![内屏横向样本](assets/screenshots/01.jpg) | ![外屏横向样本](assets/screenshots/06.jpg) |
+| 外屏横向叠键 | 内屏横向叠键 |
+|---|---|
+| ![卡比外屏横向](assets/screenshots/kirby/02.jpg) | ![卡比内屏横向](assets/screenshots/kirby/05.jpg) |
 
-| 内屏竖向掌机 | 上下分区／半折叠样本 | 外屏竖向掌机 |
-| --- | --- | --- |
-| ![内屏竖向](assets/screenshots/02.jpg) | ![上下分区样本](assets/screenshots/03.jpg) | ![外屏竖向](assets/screenshots/05.jpg) |
+画面可见内嵌16:9游戏区、紫色掌机外壳、软件铰链、规则ABXY、下方倒影、无框监测和绿色电量横栏。这是卡比的设计语言；其他游戏不应复制同一皮肤。
 
-截图由用户在本次收尾时提供；模式标签根据图片比例、前述测试描述推断，不等同于新增诊断 JSON。完整样本和读数见 [验证记录](docs/07-validation.md)。
+图中有效非零读数为59–60 FPS、CPU 36%或54%，热状态正常／温热；两张图显示0 FPS、CPU 0%，只作计数窗口状态记录，不用于帧率或省电结论。全部是标题场景静态样本，不能验证粒子时间行为、受伤回血准确率、低延迟或长期耗电。[逐图证据](evidence/kirby-final-screenshots.json) · [验证边界](docs/07-validation.md)
 
-## 我们实际完成了什么
+## 已有案例：丝之歌玻璃风格
 
-- 外屏横向、外屏竖向、内屏横向、内屏竖向、半折叠：**五套独立布局**。
-- 横向在画面上叠加触控；竖向采用上方游戏、下方掌机控制区；半折叠以运行时铰链区域分割上下屏。
-- 保持 Unity 画面、Metal 渲染尺寸、相机与 HUD 的宽高比一致，避免“只把 UIView 拉满”的人物变形。
-- 八方向摇杆、六个已有战斗动作；攻击兼确认，独立返回键；可按菜单状态精简按键，半折叠保留完整布局。
-- 所有控制元素共用浮动编辑器，含返回、编辑入口、更多和监测面板；支持尺寸、透明度、显隐、横排／竖排、分形态保存。
-- 下方 GPU 虚化倒影、掌机装饰、系统可用的液态玻璃、有限时长的水波和生命值反馈。
-- 可移动的 FPS、CPU、GPU 耗时、实际渲染尺寸、进程内存、热状态和倒影监测。
-- 可选的 Fake Lu 启动与标题标识皮肤，保留原场景加载流程。
+| 内屏横向 | 内屏竖向掌机 | 外屏竖向掌机 |
+|---|---|---|
+| ![丝之歌横向](assets/screenshots/01.jpg) | ![丝之歌内屏竖向](assets/screenshots/02.jpg) | ![丝之歌外屏竖向](assets/screenshots/05.jpg) |
 
-## 范围边界：已有原生 IPA 的适配
+保留原有0.2.19截图、复盘、源码与发布报告。此前样本约59–60 FPS，整个应用footprint约1.98–2.11GB；不等同于适配层开销或长期性能基准。
 
-输入是已经能在 iOS 原生运行的 `SilksongNative-0.8.2` IPA，以及独立资源包。我们没有完整 Unity 工程，也没有重建游戏本体。
+## 两个项目的正确目标
 
-因此，本项目完成的是**已有 iOS 原生构建的设备适配与交互补丁**，不是 PC／Switch 二进制的自动翻译器，也不是任意游戏的一键移植器。把别的平台游戏带到 iOS，仍需要原始工程、相应引擎／平台移植工作和可用资源链。见 [迁移到另一款游戏](docs/08-porting-another-game.md)。
+| 项目 | 输入与目标 | 主要解决的问题 | 当前边界 |
+|---|---|---|---|
+| 丝之歌 | 已能在iOS运行的Unity IPA＋资源包；完成设备适配 | scene/窗口、surface与相机同步、五套布局、原动作映射、编辑器、玻璃/倒影与状态观察 | 仓库src/tools仍为0.2.19归档；本地0.2.20实验不代表已上传或已实机验证 |
+| 卡比 | 原始Switch游戏文件，经nxnative构建iOS兼容宿主运行包，再适配Duo | 模块和服务bring-up、NVN→Metal资源链、内存诊断、掌机外壳、ABXY整组编辑、轻量反馈和仪表横栏 | 本仓库保存文档与用户截图，不包含卡比完整构建工程、游戏本体或密钥；v15最终包检查与真机时间行为分开记录 |
 
-“iPhone Duo”沿用用户的测试设备称呼。图示尺寸、截图与本机 SDK 是本案例依据，不作为所有设备或所有系统版本的通用规格。
+两条路线都不是任意游戏一键移植。拥有完整源码时优先正式接入目标引擎与平台。[输入路线与范围](docs/00-overview.md)
 
-## 为什么最后有效
+## 跨项目迁移标准
 
-1. **先取得真实窗口。** 单独删除全屏声明没解决旧窗口；只改 SDK 标记也不是 SDK 重建。后续加入 scene manifest、场景生命周期桥接和适配组件。
-2. **再统一坐标和渲染。** 分开管理 window、gameRegion、controlsRegion、Metal pixels 和相机 viewport；处理原生分辨率路径的方向排序。
-3. **最后做交互与外观。** 先稳定输入，再增加独立布局、倒影、液态玻璃、反馈和监测。
-4. **每次以报告和真机结果说话。** 日志先匹配版本 UUID；源代码能编译不等于运行时 ABI 正确；截图不是长期性能基准。
+1. 核对输入、引擎/模块身份和可回退基线，再进入窗口与输入适配。
+2. 运行时window、孔位、铰链为准；点、像素、pictureRect和控件坐标分开；禁止整列摄像头留黑与仅拉伸UIView。
+3. 外框、背景、倒影和反馈共用圆角与裁切；必要时按角单独拟合，不能把案例尺寸当硬件通用规格。
+4. 事件来源分级：真实状态、HUD识别、按键提示必须明确区分；保留置信、防抖、基线和取消机制。
+5. 同条件记录帧时间、CPU/GPU口径、footprint与热状态；不以瞬时截图证明减负，不盲加sleep。
+6. 确保资源身份/着色器链一致、无损去重和包完整性；编译、合成测试、真机验收分别记录。
 
 ## 文档导航
 
-| 文件 | 内容 |
-| --- | --- |
-| [00-overview](docs/00-overview.md) | 输入、约束、原生运行与设备适配的区别 |
-| [01-retrospective](docs/01-retrospective.md) | 0.2.3 → 0.2.19 的问题、试验、回退和经验 |
-| [02-architecture](docs/02-architecture.md) | 窗口、渲染、输入、UI、反馈、诊断的数据流 |
-| [03-geometry](docs/03-geometry.md) | 五形态、铰链、遮挡、比例、坐标转换 |
-| [04-controls-and-editor](docs/04-controls-and-editor.md) | 键码、菜单策略、编辑器、持久化 |
-| [05-effects-and-performance](docs/05-effects-and-performance.md) | 倒影、玻璃、反馈、各项监测的口径 |
-| [06-build-and-package](docs/06-build-and-package.md) | 可复现构建、校验、打包、历史补丁入口 |
-| [07-validation](docs/07-validation.md) | 截图证据、检查结果、仍未证明的内容 |
-| [08-porting-another-game](docs/08-porting-another-game.md) | 有工程／只有 IPA／其他平台的三条路线 |
-| [09-troubleshooting](docs/09-troubleshooting.md) | 旧窗口、拉伸、拖动禁区、崩溃和后台重启 |
-| [AI_HANDOFF](AI_HANDOFF.md) | 下一次直接交给 AI 的交接文档和提示词 |
-| [AGENTS](AGENTS.md) | AI 在此仓库工作时需要遵循的项目约束 |
+| 入口 | 内容 |
+|---|---|
+| [标准目录](docs/porting-standard/README.md) | 规范、反例、验收矩阵、ADR和状态模板 |
+| [目标与范围](docs/00-overview.md) | 已有IPA、原始游戏文件与源码三条路线 |
+| [双案例架构](docs/02-architecture.md) | 共用模块、引擎适配器与事件来源 |
+| [Duo屏幕适配](docs/03-geometry.md) | 五形态、坐标、局部孔位、非对称圆角与铰链 |
+| [输入与编辑](docs/04-controls-and-editor.md) | 原动作、ABXY整组、手柄与多指取消 |
+| [效果与性能](docs/05-effects-and-performance.md) | 各游戏换肤、粒子预算、采样和功耗权衡 |
+| [构建与资源](docs/06-build-and-package.md) | 两条独立构建链与身份校验 |
+| [验证记录](docs/07-validation.md) | 新卡比截图与旧丝之歌证据边界 |
+| [迁移到下一游戏](docs/08-porting-another-game.md) | 可执行阶段流程 |
+| [双案例故障排查](docs/09-troubleshooting.md) | 回退、日志和错误反例 |
+| [丝之歌历史复盘](docs/01-retrospective.md) | 原0.2.3→0.2.19历史保留，并链接卡比阶段记录 |
+| [卡比案例](docs/cases/kirby.md) | 原始文件构建、内存修复、外壳与低延迟反馈 |
+| [AI交接](AI_HANDOFF.md) | 下一次阅读顺序与恢复提示词 |
 
-## 快速恢复工作
+## 恢复工作
 
-环境：macOS、Xcode、Python 3；本案例使用 `iPhoneOS27.2.sdk`，编译需要目标 SDK 中存在相关接口。
+继续丝之歌0.2.19：按 [现有构建说明](docs/06-build-and-package.md) 使用tools/verify.py、tools/test.py、tools/build.py和身份校验打包器。它们不是卡比构建工具。
 
-```bash
-python3 tools/verify.py
-python3 tools/test.py
-python3 tools/build.py
-python3 tools/package.py \
-  --baseline /absolute/path/to/verified-0.2.18-or-0.2.19.ipa \
-  --bridge build/DuoSceneBridge.dylib \
-  --out build/duo-next-unsigned.ipa
-```
+继续卡比或移植另一游戏：先读标准和案例，取得对应本地工程/原始输入与匹配工具链。本仓库没有提供卡比完整宿主源码，不能仅靠本仓库重建其IPA。
 
-仓库不包含游戏 IPA、UnityFramework、游戏资源包、签名证书、原始崩溃日志或个人聊天。构建桥接源码不需要游戏二进制；生成可安装包需要自己保存的、身份校验通过的基线 IPA，并沿用现有签名流程。详见 [构建说明](docs/06-build-and-package.md)。
-
-## 当前状态
-
-收尾截图显示了 0.2.19 风格的全屏监测与玻璃控制区，游戏读数约 **59–60 FPS**，分区倒影样本约 **19–20 FPS**，热状态显示“正常”。截图中的进程内存约 **1981–2112 MB**：这是整个游戏的 footprint，不能归因于适配层。
-
-这些静态画面支持“可以运行、布局和监测可见”的结论；不能证明全部菜单事件、受伤动画、启动动画、长期内存走势或后台恢复已经完成逐项验收。已有构建报告保留原时间点状态，新证据见 `evidence/screenshot-observations.json`。
-
-## 再交给 AI 时
-
-> 请先阅读 README.md、AI_HANDOFF.md、AGENTS.md 和 PROJECT_STATE.json，把 0.2.19 当作本案例当前源码。先核对本地 IPA 的 SHA-256 和引擎 UUID，再按我的新需求修改。保留已验证的画面比例、输入映射和五套布局记录；不要恢复撤回的托管触摸和 32 位 GCHandle 路径。完成后运行对应检查，生成新的报告与 unsigned IPA，并明确哪些尚需真机验证。
-
-把仓库链接交给 AI 是恢复上下文的入口；AI 仍需实际读取这些文件，并获得本地文件／账号访问能力。这份仓库不依赖聊天服务永久记住旧对话。
+仓库保持private；无游戏可执行文件、IPA、密钥、签名材料或独立资源包。用户游戏截图只用于效果和证据说明。状态见[PROJECT_STATE.json](PROJECT_STATE.json)，指南变更见[CHANGELOG.md](CHANGELOG.md)。

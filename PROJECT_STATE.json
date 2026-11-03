@@ -91,9 +91,26 @@
   "github_repository": "https://github.com/luomaolin-bee/iphone-duo-adaptation-playbook",
   "archive_contents": "Source, docs, tests, manifests, reports, user screenshots; game binaries/resources/signing data excluded",
   "cross_project_guide": {
-    "version": "1.1",
+    "version": "1.2",
     "entry": "docs/porting-standard/README.md",
     "scope": "Silksong existing iOS IPA adaptation and Kirby original Switch game-file build",
     "source_version_unchanged": true
+  },
+  "guide_version": "1.2",
+  "repository_scope": "Two-case documentation and themed Duo adaptation playbook; bundled source/tools remain Silksong-specific",
+  "cases": {
+    "silksong": {
+      "repository_source": "0.2.19",
+      "last_user_verified": "0.2.19",
+      "local_experimental_state": "0.2.20, not uploaded as implementation"
+    },
+    "kirby": {
+      "last_packaged": "v15-stars",
+      "input_route": "Original Switch game files to nxnative iOS host",
+      "source_in_repository": false,
+      "latest_visual_evidence": "evidence/kirby-final-screenshots.json",
+      "binary_identity_for_images": "not supplied",
+      "device_behavior_and_power_acceptance": "partial; full matrix pending"
+    }
   }
 }

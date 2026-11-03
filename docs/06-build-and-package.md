@@ -1,5 +1,12 @@
 # 构建、校验与恢复
 
+## 双案例复用更新 · 指南1.2
+
+本页现有tools命令只适用于丝之歌已匹配的0.2.18/0.2.19 IPA；不是卡比构建入口。卡比使用用户本地nxnative/scripts/build_ipa_from_nsp.py与run-kirby-build.sh，从原始游戏文件提取ExeFS/RomFS，核对模块身份，建立profile，重写平台受限指令/系统调用，构建NVN→Metal着色器链及iOS宿主。UI-only可在链/资源身份不变时复用已验证镜像；改变输入必须重建。romfs.img独立保存，小包更新核对romfs.id并保留存档。完整卡比工程不在本仓库，见[cases/kirby.md](cases/kirby.md)及[构建标准B01–B03](porting-standard/STANDARD.md)。
+
+以下保留丝之歌0.2.19原案例内容；其参数和ABI不自动适用于卡比或其他游戏。
+
+
 ## 所需环境
 
 macOS + Xcode + Python 3。桥接代码用到本地 `iPhoneOS27.2.sdk` 中的 UIKit 接口；`tools/build.py` 会检查头文件和关键符号，找不到时清楚失败。最低 deployment target15仅是编译目标，运行某些效果/设备功能仍要求对应系统版本。
