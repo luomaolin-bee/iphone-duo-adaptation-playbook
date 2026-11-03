@@ -1,0 +1,152 @@
+--- a/dm/ios/Sources/DmGamepad.m
++++ b/dm/ios/Sources/DmGamepad.m
+@@ -28,6 +28,7 @@
+ #include "motion_fusion.h"
+ #include "pad_apple.h"
+ #include "pad_slots.h"
++#include "DmControllerMenu.h"
+ #include <stdatomic.h>
+ 
+ enum { B_A = 0, B_B, B_X, B_Y, B_LS, B_RS, B_L, B_R, B_ZL, B_ZR, B_PLUS, B_MINUS, B_LEFT, B_UP, B_RIGHT, B_DOWN, B_N };
+@@ -134,6 +135,7 @@
+ @end
+ static __weak DmGamepad *g_view;
+ static void pads_start(void);   // Physical controllers, below
++void dm_gamepad_reset(void);
+ 
+ @implementation DmGamepad {
+     NSMapTable<UITouch *, NSNumber *> *_owner;     // touch → control (with the key for C_BTN or the stick for C_STICK, << 8)
+@@ -201,6 +203,7 @@
+         NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+         [nc addObserver:self selector:@selector(padsChanged:) name:GCControllerDidConnectNotification object:nil];
+         [nc addObserver:self selector:@selector(padsChanged:) name:GCControllerDidDisconnectNotification object:nil];
++        [nc addObserver:self selector:@selector(padsChanged:) name:GCControllerUserCustomizationsDidChangeNotification object:nil];
+         pads_start();
+         [self padsChanged:nil];
+         motion_start();
+@@ -488,11 +491,33 @@
+     uint64_t m = dm_pad_face(g);   // by position, a Nintendo pad by its labels
+     #define K(btn, bit) if (btn.isPressed) m |= 1ull << bit
+     K(g.leftShoulder, B_L); K(g.rightShoulder, B_R); K(g.leftTrigger, B_ZL); K(g.rightTrigger, B_ZR);
+-    K(g.buttonMenu, B_PLUS); if (g.buttonOptions) K(g.buttonOptions, B_MINUS);
++    m |= dm_controller_menu_bits(g);
+     if (g.leftThumbstickButton) K(g.leftThumbstickButton, B_LS); if (g.rightThumbstickButton) K(g.rightThumbstickButton, B_RS);
+     K(g.dpad.left, B_LEFT); K(g.dpad.up, B_UP); K(g.dpad.right, B_RIGHT); K(g.dpad.down, B_DOWN);
+     #undef K
++    static char menuStateKey;
++    uint64_t menu = m & (DM_BTN_PLUS | DM_BTN_MINUS);
++    if ([objc_getAssociatedObject(g, &menuStateKey) unsignedLongLongValue] != menu) {
++        objc_setAssociatedObject(g, &menuStateKey, @(menu), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
++        LOG("controller menu edge: player=%d plus=%d minus=%d source=%s", p + 1,
++            !!(menu & DM_BTN_PLUS), !!(menu & DM_BTN_MINUS), g.buttonOptions == dm_controller_select(g) ? "native" : "alias-or-manual");
++    }
+     dm_pad_set_player(p, m, axis(g.leftThumbstick.xAxis.value), axis(g.leftThumbstick.yAxis.value), axis(g.rightThumbstick.xAxis.value), axis(g.rightThumbstick.yAxis.value));
++}
++// Dedicated callbacks cover Options/Menu separately from the profile callback.
++// Both publish the same state, so hle_hid.c latches each press once, including
++// when the profile also notifies. No touch reset or touch visibility gate here.
++static void pad_bind_menu(GCController *c) {
++    GCExtendedGamepad *g = c.extendedGamepad;
++    __weak GCExtendedGamepad *weak = g;
++    NSString *key = [NSString stringWithFormat:@"%@|%@", c.vendorName ?: @"?", c.productCategory ?: @"?"];
++    NSString *source = [NSUserDefaults.standardUserDefaults dictionaryForKey:@"DmSelectBindings1"][key];
++    dm_controller_bind_menu(g, source, ^{ GCExtendedGamepad *live = weak; if (live) read_pad(live); });
++    GCControllerButtonInput *select = dm_controller_select(g);
++    LOG("controller menu: vendor='%s' product='%s' select=%s options=%s gesture=%ld",
++        c.vendorName.UTF8String ?: "?", c.productCategory.UTF8String ?: "?",
++        select ? "available" : "missing", source.UTF8String ?: (g.buttonOptions ? "native" : "alias-or-absent"),
++        (long)select.preferredSystemGestureState);
+ }
+ // Home and Capture: without this iOS takes them as system gestures (Home opens the Games overlay, Capture a screenshot); the app gives them no function
+ static void pad_keep_system_buttons(GCController *c) { for (NSString *b in @[GCInputButtonHome, GCInputButtonShare]) c.physicalInputProfile.buttons[b].preferredSystemGestureState = GCSystemGestureStateDisabled; }
+@@ -504,11 +529,11 @@
+ }
+ // Called at start and on every connect / disconnect (gone: the controller that was just removed, nil otherwise); returns whether a controller is in use
+ static BOOL pads_merged(GCController *gone) {
+-    if (gone) { gone.extendedGamepad.valueChangedHandler = nil; dm_motion_detach(gone, 0); }
++    if (gone) { dm_controller_unbind_menu(gone.extendedGamepad); gone.extendedGamepad.valueChangedHandler = nil; dm_motion_detach(gone, 0); }
+     BOOL any = NO; int motion = 0;
+     for (GCController *c in GCController.controllers) if (c != gone && c.extendedGamepad) {
+         if (c.motion.hasRotationRate) motion = 1;
+-        any = YES; pad_keep_system_buttons(c); c.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad *g, GCControllerElement *el) { (void)el; read_pad(g); };
++        any = YES; pad_keep_system_buttons(c); pad_bind_menu(c); c.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad *g, GCControllerElement *el) { (void)el; read_pad(g); };
+         dm_motion_attach(c, 0);   // every controller is player 1: the last one moved drives its six-axis sensor
+         read_pad(c.extendedGamepad);
+     }
+@@ -520,6 +545,7 @@
+     NSArray<GCController *> *now = GCController.controllers; char nb[16];
+     for (int p = 0; p < DM_PLAYERS; p++) if (g_held[p] && (g_held[p] == gone || ![now containsObject:g_held[p]])) {
+         npad_name(p, nb, sizeof nb); LOG("controller '%s' disconnected: player %d (npad %s) is free", pad_name(g_held[p]), p + 1, nb);
++        dm_controller_unbind_menu(g_held[p].extendedGamepad);
+         g_held[p].extendedGamepad.valueChangedHandler = nil;
+         dm_motion_detach(g_held[p], p);   // player 1's: the phone's gyro (if on) takes over from its next sample
+         dm_haptics_apple_controller(p, nil);
+@@ -535,6 +561,10 @@
+         npad_name(p, nb, sizeof nb); LOG("controller '%s' connected: player %d (npad %s)%s", pad_name(c), p + 1, nb, c.motion.hasRotationRate ? ", with motion (gyro)" : "");
+         read_pad(c.extendedGamepad);
+     }
++    for (int p = 0; p < DM_PLAYERS; p++) if (g_held[p] && g_held[p] != gone) {
++        g_held[p].extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad *g, GCControllerElement *el) { (void)el; read_pad(g); };
++        pad_bind_menu(g_held[p]); read_pad(g_held[p].extendedGamepad);
++    }
+     dm_pad_players(pad_slot_mask(&g_slots));
+     return pad_slot_mask(&g_slots) != 0;
+ }
+@@ -545,6 +575,39 @@
+     dispatch_async(dispatch_get_main_queue(), ^{ self->_padOff = any; self->_controls.hidden = any; dm_duo_controller(any); [self reset]; });   // the touch gamepad hides while any controller is in use
+ }
+ @end
++
++// User-selected compatibility binding, scoped to the OS-reported pad family.
++// Auto uses only native Options or explicit Select/View/Back/Minus aliases.
++void dm_gamepad_select_settings(UIViewController *presenter) {
++    GCController *c = nil;
++    for (GCController *candidate in GCController.controllers) if (candidate.extendedGamepad) { c = candidate; break; }
++    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Select / \u51cf\u53f7\u952e"
++        message:c ? [NSString stringWithFormat:@"%@\n\u9ed8\u8ba4\u4f7f\u7528\u7cfb\u7edf Select\uff1b\u4e0d\u54cd\u5e94\u65f6\u518d\u9009\u62e9 DS4 \u89e6\u6478\u677f\u6216 Share\u3002", c.vendorName ?: c.productCategory] : @"\u8bf7\u5148\u8fde\u63a5\u624b\u67c4"
++        preferredStyle:UIAlertControllerStyleActionSheet];
++    if (c) {
++        NSString *key = [NSString stringWithFormat:@"%@|%@", c.vendorName ?: @"?", c.productCategory ?: @"?"];
++        NSArray *names = @[@"auto", GCInputButtonOptions, GCInputDualShockTouchpadButton, GCInputButtonShare, GCInputButtonHome];
++        NSArray *titles = @[@"\u7cfb\u7edf Select\uff08\u81ea\u52a8\uff09", @"Options / Select", @"DS4 \u89e6\u6478\u677f\u6309\u4e0b", @"Share / \u5206\u4eab\u952e", @"Home\uff08\u624b\u52a8\u6307\u5b9a\uff09"];
++        NSMutableSet *seen = [NSMutableSet set];
++        for (NSUInteger i = 0; i < names.count; i++) {
++            NSString *name = names[i]; BOOL automatic = i == 0;
++            GCControllerButtonInput *button = c.physicalInputProfile.buttons[name];
++            if (!automatic && (!button || button == c.extendedGamepad.buttonMenu || [seen containsObject:button])) continue;
++            if (button) [seen addObject:button];
++            [sheet addAction:[UIAlertAction actionWithTitle:titles[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
++                (void)action;
++                NSMutableDictionary *saved = [[NSUserDefaults.standardUserDefaults dictionaryForKey:@"DmSelectBindings1"] mutableCopy] ?: [NSMutableDictionary dictionary];
++                if (automatic) [saved removeObjectForKey:key]; else saved[key] = name;
++                [NSUserDefaults.standardUserDefaults setObject:saved forKey:@"DmSelectBindings1"];
++                [g_view reset]; [g_view padsChanged:nil];
++            }]];
++        }
++    }
++    [sheet addAction:[UIAlertAction actionWithTitle:@"\u53d6\u6d88" style:UIAlertActionStyleCancel handler:nil]];
++    sheet.popoverPresentationController.sourceView = presenter.view;
++    sheet.popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(presenter.view.bounds), CGRectGetMidY(presenter.view.bounds), 1, 1);
++    [presenter presentViewController:sheet animated:YES completion:nil];
++}
+ 
+ UIView *dm_gamepad_view(CGRect frame) { DmGamepad *v = [[DmGamepad alloc] initWithFrame:frame]; g_view = v; return v; }
+ void dm_gamepad_active(void) { dispatch_async(dispatch_get_main_queue(), ^{ [g_view padsChanged:nil]; for (GCController *c in GCController.controllers) dm_motion_rearm(c); }); }   // On become active: motion_apple.h
+--- a/dm/ios/Sources/DuoShell.m
++++ b/dm/ios/Sources/DuoShell.m
+@@ -10,6 +10,7 @@
+ #include <stdatomic.h>
+ #include "dm_input.h"
+ extern void dm_gamepad_reset(void);
++extern void dm_gamepad_select_settings(UIViewController *presenter);
+ extern uint64_t mtl_present_count(void);
+ extern double mtl_duo_gpu_ms(void);
+ static __weak UIViewController *rootVC;
+@@ -222,6 +223,7 @@
+ - (void)showMenu {
+  dm_gamepad_reset();starBurst(self,self.gear.center);
+  UIAlertController *a=[UIAlertController alertControllerWithTitle:@"\u2605 \u661f\u4e4b\u5361\u6bd4 \u00b7 \u638c\u673a\u8bbe\u7f6e" message:@"\u6309\u952e\u529f\u80fd\u6cbf\u7528\u539f\u6620\u5c04\uff1b\u6bcf\u79cd\u5f62\u6001\u72ec\u7acb\u4fdd\u5b58\u3002" preferredStyle:UIAlertControllerStyleActionSheet];a.view.tintColor=pink();
++ [a addAction:[UIAlertAction actionWithTitle:@"\u624b\u67c4 Select \u6765\u6e90" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){(void)action;dispatch_after(dispatch_time(DISPATCH_TIME_NOW,300*NSEC_PER_MSEC),dispatch_get_main_queue(),^{dm_gamepad_select_settings(rootVC);});}]];
+ 
+  [a addAction:[UIAlertAction actionWithTitle:@"\u2726 \u81ea\u5b9a\u4e49\u952e\u4f4d" style:0 handler:^(UIAlertAction*x){starBurst(self,self.gear.center);[self startEditing];}]];
+  [a addAction:[UIAlertAction actionWithTitle:@"\u6b21\u7ea7\u952e\u6a2a\u6392\uff0f\u7ad6\u6392" style:0 handler:^(UIAlertAction*x){[self arrangeSecondary];}]];

@@ -1,0 +1,87 @@
+{
+  "version": "v16-select",
+  "baseline": "KirbyDeluxe-1.0.0-v15-stars.ipa",
+  "baseline_sha256": "8cd74e53b788c157fcce9c4f593cf0b575acec2ca3461286cbce8791c2679cdd",
+  "output": "KirbyDeluxe-1.0.0-v16-select.ipa",
+  "sha256": "186b7bba947323246437446b97a7bf1b94e7692f6434f65416e0f4f9ad1cc38b",
+  "bytes": 574246939,
+  "zip_crc": "PASS",
+  "changed_entries": [
+    "Payload/DmIOS.app/DmIOS",
+    "Payload/DmIOS.app/Info.plist"
+  ],
+  "unchanged_entries_sha256": 33,
+  "embedded_guest_segments": {
+    "__TEXT,__dmmainx0": {
+      "bytes": 17874944,
+      "sha256": "5ee1d238e9e67320484ea0f05f83d127b86e066279c94cc3906c721afb019e93"
+    },
+    "__TEXT,__dmmainx1": {
+      "bytes": 868352,
+      "sha256": "40d00e867371c23b08dc4137bd1d117beb4c6d09ddf501128cebf58bda3914a1"
+    },
+    "__TEXT,__dmsubsdk0x0": {
+      "bytes": 3407872,
+      "sha256": "b2ae9d81c5691f54b3cdb3babf66d24fd9bb4212c0c0d211fdef41b2a0a17971"
+    },
+    "__TEXT,__dmsubsdk0x1": {
+      "bytes": 442368,
+      "sha256": "76a461b1d58a03d841f7184d62ffb078710a590889b75be18d416d7c45b59a9d"
+    },
+    "__TEXT,__dmsdkx0": {
+      "bytes": 6127616,
+      "sha256": "88a0fad4347f63ccaf397d6293b98f75fd107a2073c7115e5da9497667cc7e4d"
+    },
+    "__TEXT,__dmsdkx1": {
+      "bytes": 606208,
+      "sha256": "b22b9800611687956cdb64bcc790d427f8843c532775de747cefbf3b22befd7d"
+    },
+    "__DMmainW": {
+      "bytes": 5914624,
+      "sha256": "d4fa3e14a3fde43be30c46bab7081154b8a9d70052ef0d8043bb6aeef5a38145"
+    },
+    "__DMsubsdk0W": {
+      "bytes": 3538944,
+      "sha256": "db2efa9240c784fa21673aeb1cbbcf1d9b8182ea158b336195947ab2b69c957a"
+    },
+    "__DMsdkW": {
+      "bytes": 8224768,
+      "sha256": "792075b643ef474040038847926d06e1651e79d74dcaaa8f459d9e79c5a119dd"
+    }
+  },
+  "embedded_guest_segments_identical_to_v15": true,
+  "shader_and_game_resources_identical": true,
+  "new_code_signing": "not signed; use existing user signing workflow and entitlements",
+  "device_acceptance": "pending",
+  "controller": "GameSir Pocket Taco; exact firmware/input source unverified",
+  "test_assertions": 46,
+  "ios_build": "PASS",
+  "geometry_and_hud_regression": "PASS",
+  "scope": "Select compatibility only; v15 geometry and feedback implementation retained",
+  "static_analysis": {
+    "baseline_diagnostics": 2,
+    "current_diagnostics": 2,
+    "new_diagnostics": [],
+    "existing": [
+      [
+        "deadcode.DeadStores",
+        "Value stored to 'best' is never read"
+      ],
+      [
+        "osx.cocoa.RetainCount",
+        "Potential leak of an object stored into 'p'"
+      ]
+    ],
+    "strict_ios_syntax": "PASS with existing UIKit deprecation warnings excluded; no unrelated UI code changed",
+    "controller_test_assertions": 46,
+    "host_snapshot": "user v15 UI baseline; focused input delta",
+    "device_verified": false
+  },
+  "docs_tests": "11 passed",
+  "source_digests": {
+    "DmGamepad.m": "3bbb646e0cf66677fe8216b26010614f5afe055555cd9bce8f5d9993e4aad85f",
+    "DmControllerMenu.h": "2d7b8bf1784ea7068dc97d3c3455b60984543cd2f0306e1b8073e26eb21de569",
+    "DuoShell.m": "777f05cfb37360b6ff0c00a3b8fe551b959b672cd44ffada346878ba4afe5525",
+    "test_controller_menu.py": "b93fc1a588e534bd5df285f1509d1f4fa6ffb61be2f814d05f064e63e0f37eff"
+  }
+}
