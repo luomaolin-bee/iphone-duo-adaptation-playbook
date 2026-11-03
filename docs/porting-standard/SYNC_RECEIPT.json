@@ -1,27 +1,50 @@
 {
+  "guide_version": "1.2",
+  "content_commit": "fe299b93837429a2eabcc6808adab763d9fcd4a6",
   "repository": "https://github.com/luomaolin-bee/iphone-duo-adaptation-playbook",
   "branch": "main",
-  "commit": "6cf7388a3978d41f5fe5700e8e15249dde732544",
-  "guide_version": "1.1",
-  "visibility": "private",
-  "uploaded_files": [
-    "docs/porting-standard/README.md",
-    "docs/porting-standard/STANDARD.md",
-    "docs/porting-standard/GUIDE.md",
-    "docs/porting-standard/ANTI_PATTERNS.md",
-    "docs/porting-standard/ACCEPTANCE.md",
-    "docs/porting-standard/SOURCES.md",
-    "docs/porting-standard/CHANGELOG.md",
-    "docs/porting-standard/AI_HANDOFF.md",
-    "docs/porting-standard/PROJECT_STATE.json",
-    "docs/porting-standard/templates/ADR.md",
-    "docs/porting-standard/templates/PROJECT_STATE.template.json",
-    "README.md",
-    "AI_HANDOFF.md",
-    "PROJECT_STATE.json"
+  "status": "uploaded_and_readback_verified",
+  "documents_matched": 29,
+  "image_git_blobs": [
+    {
+      "path": "assets/screenshots/kirby/01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d6f4ff9e14ac71c20611cf230f08d87c03bc4309",
+      "bytes": 227229
+    },
+    {
+      "path": "assets/screenshots/kirby/02.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f14a945690d6b5c1133c302f9a59ba04f1d8c5b",
+      "bytes": 287101
+    },
+    {
+      "path": "assets/screenshots/kirby/03.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "98e891914510205131c38a6ba73490c5d8bc416f",
+      "bytes": 239075
+    },
+    {
+      "path": "assets/screenshots/kirby/04.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb6f5d9f1eadc80fd54850f00dfb6d07a117acf8",
+      "bytes": 234148
+    },
+    {
+      "path": "assets/screenshots/kirby/05.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a007eb6af5c7843e4a83ef28d27f7843bb4c5cc6",
+      "bytes": 294183
+    }
   ],
-  "readback_pass": true,
-  "source_changes": false,
-  "verification_scope": "14 original document additions/updates read back at content_commit; sync receipt added afterwards",
-  "content_commit": "6cf7388a3978d41f5fe5700e8e15249dde732544"
+  "existing_implementation_entries_preserved": 33,
+  "markdown_links": "PASS via combined base/update tree",
+  "historical_source_version": "0.2.19",
+  "gallery_binary_identity": "not supplied",
+  "visual_and_performance_claims": "static title screenshots only"
 }
