@@ -1,50 +1,19 @@
 {
-  "guide_version": "1.2",
-  "content_commit": "fe299b93837429a2eabcc6808adab763d9fcd4a6",
+  "guide_version": "1.3",
+  "date": "2026-11-03",
   "repository": "https://github.com/luomaolin-bee/iphone-duo-adaptation-playbook",
   "branch": "main",
-  "status": "uploaded_and_readback_verified",
-  "documents_matched": 29,
-  "image_git_blobs": [
-    {
-      "path": "assets/screenshots/kirby/01.jpg",
-      "mode": "100644",
-      "type": "blob",
-      "sha": "d6f4ff9e14ac71c20611cf230f08d87c03bc4309",
-      "bytes": 227229
-    },
-    {
-      "path": "assets/screenshots/kirby/02.jpg",
-      "mode": "100644",
-      "type": "blob",
-      "sha": "1f14a945690d6b5c1133c302f9a59ba04f1d8c5b",
-      "bytes": 287101
-    },
-    {
-      "path": "assets/screenshots/kirby/03.jpg",
-      "mode": "100644",
-      "type": "blob",
-      "sha": "98e891914510205131c38a6ba73490c5d8bc416f",
-      "bytes": 239075
-    },
-    {
-      "path": "assets/screenshots/kirby/04.jpg",
-      "mode": "100644",
-      "type": "blob",
-      "sha": "fb6f5d9f1eadc80fd54850f00dfb6d07a117acf8",
-      "bytes": 234148
-    },
-    {
-      "path": "assets/screenshots/kirby/05.jpg",
-      "mode": "100644",
-      "type": "blob",
-      "sha": "a007eb6af5c7843e4a83ef28d27f7843bb4c5cc6",
-      "bytes": 294183
-    }
-  ],
+  "visibility_observed": "public",
+  "status": "merged_and_readback_verified",
+  "content_commit": "1456f6b956f436a50e1c27a320cd60057f887dd7",
+  "verified_merge_commit": "d517d4850cd6bd2db02a0c0988e1fb4472835435",
+  "verified_content_tree": "6a0a6a2e6405cc6d3a998dd8b25130837d0020b0",
+  "pull_request": "https://github.com/luomaolin-bee/iphone-duo-adaptation-playbook/pull/1",
+  "matched_content_files": 21,
   "existing_implementation_entries_preserved": 33,
-  "markdown_links": "PASS via combined base/update tree",
-  "historical_source_version": "0.2.19",
-  "gallery_binary_identity": "not supplied",
-  "visual_and_performance_claims": "static title screenshots only"
+  "package": "KirbyDeluxe-1.0.0-v16-select.ipa",
+  "package_sha256": "186b7bba947323246437446b97a7bf1b94e7692f6434f65416e0f4f9ad1cc38b",
+  "device_acceptance": "pending; controller identity/function confirmed, firmware mapping not observed",
+  "scope": "documentation, focused helper/test/integration patch, sanitized package report; no game binary/key/IPA uploaded",
+  "receipt_semantics": "Commit identifiers name the verified content before this receipt was committed; receipt does not claim to embed its own commit identity."
 }
