@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-02",
+  "guide_version": "1.1",
+  "previous_case": "Silksong last user-verified 0.2.19; local state reports source 0.2.20",
+  "current_case": "Kirby v15, original Switch XCI to nxnative iOS host",
+  "github_live_access": "Restored; private remote main verified at ccc741ddbe74cbbe32956609c18dba70e1dca812; publication receipt pending",
+  "baseline_ipa": "KirbyDeluxe-1.0.0-v15-stars.ipa",
+  "sha256": "8cd74e53b788c157fcce9c4f593cf0b575acec2ca3461286cbce8791c2679cdd",
+  "main_build_id": "fa24ea3c3a512c072a2062556c9c9692",
+  "title_id": "01006B601380E000",
+  "open": [
+    "v15 corner visual validation",
+    "HUD health recognition correctness and latency",
+    "actual charge-state hook absent",
+    "main busy-yield caller diagnosis",
+    "matched sustained power comparison",
+    "independent sideways half-fold behavior"
+  ],
+  "source_repo": "/Users/louis/Documents/Codex/2026-11-02/will/nxnative",
+  "previous_archive": "/Users/louis/Documents/Codex/2026-11-01/chatgpt-conversation-6ae7b2bd-3fc0-83ea-a9a2/outputs/duo-adaptation-playbook",
+  "diagnostics": "/Users/louis/Desktop/游戏开发/星之卡比will豪华版/01006B601380E000-work/diagnostics",
+  "previous_case_local_state": "work/duo-0221/PROJECT_STATE.json",
+  "standard_entry": "STANDARD.md",
+  "acceptance_entry": "ACCEPTANCE.md",
+  "remote_silksong_source_version": "0.2.19"
+}

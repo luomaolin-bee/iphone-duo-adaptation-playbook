@@ -1,0 +1,25 @@
+# 来源与参考方法
+
+## 已读取本地证据
+
+- 仓库原docs及README：上一项目README、复盘、几何、性能与迁移说明；最后用户截图依据0.2.19。
+- 作者本地work/duo-0221/PROJECT_STATE.json（本次未上传）：当前声明源码0.2.20；不能按目录名推断0.2.21。其source_device_verified=false，最后用户验证0.2.19。
+- 作者本地卡比v15 UI快照（本次未上传）：v15 UI参考快照；并非独立SDK，也不包含完整游戏构建链。
+- GUIDE.md、PROJECT_STATE.json：本次卡比构建身份、诊断路径、具体经验与未完成项。
+
+## GitHub现场检查
+
+2026-11-02，连接账号luomaolin-bee已确认；list_installations返回空，list_repositories及按affiliation查询均返回空；目标私有仓库get_repo返回404。只能说明此连接无可访问安装/仓库，不能断言仓库被删除。未读取远端新内容或写入远端。
+
+## 借鉴的公开结构（重新归纳，不照抄政策）
+
+- [MADR模板](https://github.com/adr/madr/blob/develop/template/adr-template.md)：借鉴背景、方案、选择、代价和确认方式，形成templates/ADR.md。
+- [SDL iOS平台说明](https://github.com/libsdl-org/SDL/blob/main/docs/README-ios.md)：借鉴平台文档将构建、点/像素、生命周期分开组织的思路；不把其API或版本阈值当成本项目已验证事实。
+- [Dolphin贡献指南](https://github.com/dolphin-emu/dolphin/blob/master/Contributing.md)：仅借鉴分类导航和工程约定显式列出的结构，不复制其贡献准入政策、平台实现或代码。
+- [Google代码审查标准](https://github.com/google/eng-practices/blob/master/review/reviewer/standard.md)：参考将可持续工程质量作为审阅依据的组织思路；该仓库页面标为归档，不作为实时项目政策。
+
+公开文档只提供组织与审阅方法，不作为Duo硬件规格、两游戏实测数据或移植可行性的证据。
+
+## 授权恢复后核对
+
+已通过GitHub插件读取main的AGENTS.md、README.md、AI_HANDOFF.md、PROJECT_STATE.json；基线提交ccc741ddbe74cbbe32956609c18dba70e1dca812。远端源码身份0.2.19，现有本地后续状态不覆盖此远端身份。此前404和空安装列表为历史访问故障，当前访问已恢复。

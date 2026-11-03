@@ -1,0 +1,14 @@
+{
+  "schema": 2,
+  "route": null,
+  "goal": null,
+  "current_source_version": null,
+  "last_device_verified_version": null,
+  "baseline_hash": null,
+  "input_identity": {},
+  "runtime_geometry_report": null,
+  "tests": [],
+  "performance_thresholds": {},
+  "open_items": [],
+  "rollback": null
+}

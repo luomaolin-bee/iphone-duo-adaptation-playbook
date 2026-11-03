@@ -63,3 +63,7 @@
 ```
 
 这是一份可携带的项目记忆。新 AI 需要读到文件内容；只有仓库名字或聊天标题不保证能恢复所有细节。
+
+## 跨项目标准入口
+
+继续本游戏实现时保留上述0.2.19身份与验证边界；开始另一款游戏时，先读 [跨项目标准](docs/porting-standard/STANDARD.md)、[错误反例](docs/porting-standard/ANTI_PATTERNS.md)和[验收矩阵](docs/porting-standard/ACCEPTANCE.md)。卡比是原始Switch游戏文件经nxnative构建iOS运行包，不能与本案例已有Unity IPA设备适配混称。本地后续0.2.20状态与远端0.2.19分别记录，不推断目录名代表发布版本。

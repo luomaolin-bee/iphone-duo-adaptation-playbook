@@ -6,6 +6,10 @@
 
 这份仓库既是项目复盘，也是下次交给 AI 的工作记忆。先读 [AI_HANDOFF.md](AI_HANDOFF.md)，再看 [PROJECT_STATE.json](PROJECT_STATE.json) 和 [架构说明](docs/02-architecture.md)。
 
+## 跨项目移植标准（丝之歌＋卡比）
+
+新增 [标准方案 1.1](docs/porting-standard/README.md)：区分已有原生IPA设备适配与原始游戏文件构建，包含Duo五形态几何、错误反例、轻量反馈、CPU/GPU/内存诊断与逐项验收。复用机制，按目标游戏提取视觉元素。本目录原丝之歌源码与历史基线仍为0.2.19；跨项目指南不覆盖原工程状态。
+
 ## 最终效果
 
 | 内屏横向 | 外屏横向 |

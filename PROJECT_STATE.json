@@ -89,5 +89,11 @@
   "source_entry": "src/DuoSceneBridge.m",
   "future_agent_entry": "AI_HANDOFF.md",
   "github_repository": "https://github.com/luomaolin-bee/iphone-duo-adaptation-playbook",
-  "archive_contents": "Source, docs, tests, manifests, reports, user screenshots; game binaries/resources/signing data excluded"
+  "archive_contents": "Source, docs, tests, manifests, reports, user screenshots; game binaries/resources/signing data excluded",
+  "cross_project_guide": {
+    "version": "1.1",
+    "entry": "docs/porting-standard/README.md",
+    "scope": "Silksong existing iOS IPA adaptation and Kirby original Switch game-file build",
+    "source_version_unchanged": true
+  }
 }
