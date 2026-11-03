@@ -6,6 +6,12 @@
 
 **先读 [执行标准](docs/porting-standard/STANDARD.md)，再看 [错误做法](docs/porting-standard/ANTI_PATTERNS.md)和[验收矩阵](docs/porting-standard/ACCEPTANCE.md)。** 开始新游戏时重新提取它自己的视觉元素，复用坐标、事件接口、效果预算和诊断方法。
 
+## 引用与使用权限
+
+允许署名引用与原样转载，禁止对外传播改编版本。原创文档采用 **CC BY-ND 4.0**；原创代码采用单独的署名原样转载许可，不作为开放修改传播的开源软件发布。游戏画面、标志与第三方内容不包含在作者授权内。[完整授权范围](LICENSE.md) · [引用格式](CITATION.md)
+
+公开访问不会让普通访客获得修改本仓库的权限。作者已要求将仓库设为Public；实际可见性以GitHub设置为准。
+
 ## 最终效果：卡比掌机风格
 
 以下五张为用户本轮提供的最新效果图，原图原样保留。形态标签由比例和界面分区推断，不替代运行时几何报告；截图未附包hash，不能独立确认具体二进制版本。
@@ -72,4 +78,4 @@
 
 继续卡比或移植另一游戏：先读标准和案例，取得对应本地工程/原始输入与匹配工具链。本仓库没有提供卡比完整宿主源码，不能仅靠本仓库重建其IPA。
 
-仓库保持private；无游戏可执行文件、IPA、密钥、签名材料或独立资源包。用户游戏截图只用于效果和证据说明。状态见[PROJECT_STATE.json](PROJECT_STATE.json)，指南变更见[CHANGELOG.md](CHANGELOG.md)。
+本手册面向社区公开展示；无游戏可执行文件、IPA、密钥、签名材料或独立资源包。用户游戏截图只用于效果和证据说明。状态见[PROJECT_STATE.json](PROJECT_STATE.json)，指南变更见[CHANGELOG.md](CHANGELOG.md)。

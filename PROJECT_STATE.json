@@ -3,7 +3,7 @@
   "project": "iphone-duo-adaptation-playbook",
   "archive_date": "2026-11-02",
   "current_source_version": "0.2.19",
-  "github_visibility_requested": "private",
+  "github_visibility_requested": "public",
   "repo_name": "iphone-duo-adaptation-playbook",
   "input_scope": "Existing native iOS Unity IPA plus separately owned resource archive; Unity project unavailable",
   "package_baselines": [
@@ -112,5 +112,13 @@
       "binary_identity_for_images": "not supplied",
       "device_behavior_and_power_acceptance": "partial; full matrix pending"
     }
+  },
+  "github_visibility_last_observed": "private",
+  "reuse_policy": {
+    "documents": "CC-BY-ND-4.0 for first-party original text only",
+    "original_code": "Attributed verbatim redistribution; no public distribution of modified versions; not an open-source license",
+    "third_party": "Excluded; original rights/licenses apply",
+    "entry": "LICENSE.md",
+    "citation": "CITATION.md"
   }
 }

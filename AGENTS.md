@@ -11,4 +11,4 @@
 9. Build success/static analysis/synthetic tests are not device acceptance. Record new user screenshots, diagnostics and matching crash UUIDs separately from historical build reports.
 10. Do not infer background-kill causes or promise save-state recovery from unrelated crash logs. Collect matching diagnostics first.
 11. Each change needs a concise behavior/rationale/validation note; update state and hashes only when appropriate. New known-good baseline requires actual user/device evidence.
-12. GitHub visibility is private unless the owner explicitly changes it. No existing instruction authorizes messaging other people or publishing release binaries.
+12. The owner explicitly requests Public visibility. Changing visibility does not grant public write permission. Follow LICENSE.md: original docs CC BY-ND 4.0, original code limited attributed verbatim redistribution, third-party material excluded. Check actual GitHub visibility separately; do not claim Public until verified. No existing instruction authorizes messaging other people or publishing release binaries.
