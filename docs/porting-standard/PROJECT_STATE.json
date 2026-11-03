@@ -1,8 +1,8 @@
 {
   "date": "2026-11-02",
-  "guide_version": "1.2",
+  "guide_version": "1.3",
   "previous_case": "Silksong last user-verified 0.2.19; local state reports source 0.2.20",
-  "current_case": "Kirby v15, original Switch XCI to nxnative iOS host",
+  "current_case": "Kirby v16 Select compatibility candidate; rollback package v15; device fix acceptance pending",
   "github_live_access": "Restored; merged standard 1.1 uploaded to private main; 14 document files read back and matched.",
   "baseline_ipa": "KirbyDeluxe-1.0.0-v15-stars.ipa",
   "sha256": "8cd74e53b788c157fcce9c4f593cf0b575acec2ca3461286cbce8791c2679cdd",
@@ -25,5 +25,17 @@
   "remote_silksong_source_version": "0.2.19",
   "content_commit": "6cf7388a3978d41f5fe5700e8e15249dde732544",
   "gallery_evidence": "evidence/kirby-final-screenshots.json",
-  "gallery_binary_identity": "not supplied"
+  "gallery_binary_identity": "not supplied",
+  "last_update": "2026-11-03",
+  "controller_select_issue": {
+    "case": "Kirby",
+    "model_reported_by_user": "GameSir Pocket Taco / 盖世小鸡塔可",
+    "function": "Select for inventory/map/settings, not confirm",
+    "candidate_package": "v16-select",
+    "status": "implemented; local checks passed; device pending",
+    "confirmed_device_root_cause": null,
+    "diagnostic_record": "docs/cases/kirby-select-v16.md",
+    "package_sha256": "186b7bba947323246437446b97a7bf1b94e7692f6434f65416e0f4f9ad1cc38b",
+    "package_report": "evidence/reports/kirby-v16-select-report.json"
+  }
 }

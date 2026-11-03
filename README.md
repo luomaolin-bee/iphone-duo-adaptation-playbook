@@ -1,6 +1,6 @@
 # iPhone Duo 游戏移植与适配开发手册
 
-**Fake Lu · Duo Adaptation Playbook · 指南 1.2**
+**Fake Lu · Duo Adaptation Playbook · 指南 1.3**
 
 从《丝之歌》的已有原生 iOS IPA 设备适配，到《星之卡比 Wii 豪华版》的原始游戏文件构建：记录两条不同路线的正确目标、故障证据、Duo 五形态布局和可复用交互机制。
 
@@ -79,3 +79,8 @@
 继续卡比或移植另一游戏：先读标准和案例，取得对应本地工程/原始输入与匹配工具链。本仓库没有提供卡比完整宿主源码，不能仅靠本仓库重建其IPA。
 
 本手册面向社区公开展示；无游戏可执行文件、IPA、密钥、签名材料或独立资源包。用户游戏截图只用于效果和证据说明。状态见[PROJECT_STATE.json](PROJECT_STATE.json)，指南变更见[CHANGELOG.md](CHANGELOG.md)。
+
+
+## 指南1.3：塔可 Select 兼容更新
+
+新增[故障复盘与真机待验项](docs/cases/kirby-select-v16.md)、[菜单键执行标准 I02–I04](docs/porting-standard/STANDARD.md)和[针对性的实现增量与测试](code-examples/controller-select/README.md)。卡比 v16 已本地构建；完整游戏安装包和资源仍只在本地交付。

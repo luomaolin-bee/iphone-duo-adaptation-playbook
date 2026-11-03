@@ -28,3 +28,8 @@ v15血条最高6Hz、较热/低电量3Hz，共享256×144 GPU小图；两次确�
 ## 复用入口
 
 按[跨项目标准](../porting-standard/STANDARD.md)处理坐标、事件与预算；按[错误反例](../porting-standard/ANTI_PATTERNS.md)避免摄像头整列留白、独立反馈膜、无证据sleep和错误ABI。原始文件构建与UI-only资源复用见[构建说明](../06-build-and-package.md)。
+
+
+## Select 兼容更新 v16
+
+用户报告盖世小鸡塔可的道具／地图／设置 Select 键无响应。新版本保留 v15 视觉与资源，补齐菜单键来源、单键回调、系统手势与重绑，并提供显式兼容选择。[处理与待验记录](kirby-select-v16.md)。
