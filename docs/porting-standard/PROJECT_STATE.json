@@ -3,7 +3,7 @@
   "guide_version": "1.1",
   "previous_case": "Silksong last user-verified 0.2.19; local state reports source 0.2.20",
   "current_case": "Kirby v15, original Switch XCI to nxnative iOS host",
-  "github_live_access": "Restored; private remote main verified at ccc741ddbe74cbbe32956609c18dba70e1dca812; publication receipt pending",
+  "github_live_access": "Restored; merged standard 1.1 uploaded to private main; 14 document files read back and matched.",
   "baseline_ipa": "KirbyDeluxe-1.0.0-v15-stars.ipa",
   "sha256": "8cd74e53b788c157fcce9c4f593cf0b575acec2ca3461286cbce8791c2679cdd",
   "main_build_id": "fa24ea3c3a512c072a2062556c9c9692",
@@ -22,5 +22,6 @@
   "previous_case_local_state": "work/duo-0221/PROJECT_STATE.json",
   "standard_entry": "STANDARD.md",
   "acceptance_entry": "ACCEPTANCE.md",
-  "remote_silksong_source_version": "0.2.19"
+  "remote_silksong_source_version": "0.2.19",
+  "content_commit": "6cf7388a3978d41f5fe5700e8e15249dde732544"
 }

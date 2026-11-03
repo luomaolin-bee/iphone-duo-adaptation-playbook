@@ -1,0 +1,27 @@
+{
+  "repository": "https://github.com/luomaolin-bee/iphone-duo-adaptation-playbook",
+  "branch": "main",
+  "commit": "6cf7388a3978d41f5fe5700e8e15249dde732544",
+  "guide_version": "1.1",
+  "visibility": "private",
+  "uploaded_files": [
+    "docs/porting-standard/README.md",
+    "docs/porting-standard/STANDARD.md",
+    "docs/porting-standard/GUIDE.md",
+    "docs/porting-standard/ANTI_PATTERNS.md",
+    "docs/porting-standard/ACCEPTANCE.md",
+    "docs/porting-standard/SOURCES.md",
+    "docs/porting-standard/CHANGELOG.md",
+    "docs/porting-standard/AI_HANDOFF.md",
+    "docs/porting-standard/PROJECT_STATE.json",
+    "docs/porting-standard/templates/ADR.md",
+    "docs/porting-standard/templates/PROJECT_STATE.template.json",
+    "README.md",
+    "AI_HANDOFF.md",
+    "PROJECT_STATE.json"
+  ],
+  "readback_pass": true,
+  "source_changes": false,
+  "verification_scope": "14 original document additions/updates read back at content_commit; sync receipt added afterwards",
+  "content_commit": "6cf7388a3978d41f5fe5700e8e15249dde732544"
+}
