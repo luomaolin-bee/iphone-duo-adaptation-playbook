@@ -7,3 +7,7 @@
 5. 后续更新先读取实际分支、文件与SHA，再按GITHUB_UPDATE_PLAN.md生成可审阅更新；不要覆盖未知远端改动。
 
 技能入口：/Users/louis/.codex/skills/duo-game-porting/SKILL.md。本地文档可迁移，不声称聊天自动永久记忆。
+
+## 1.4 副屏增量
+
+阅读[副屏标准](../10-secondary-screen.md)和S01–S08，填写templates/SECONDARY_SCREEN.template.json。第三方研究不升级现有游戏验收；保留1.3手柄Select规则。背景铺满/重要操作局部避让，页面切换与profile切换分开，信息面板与虚拟键分开控制；未获可靠状态时保持S0。

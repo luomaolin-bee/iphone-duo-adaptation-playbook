@@ -60,3 +60,7 @@ flowchart TD
 布局数据模型、编辑器结构、轻量视觉层、诊断字段分层可迁移。`TPPad` 方法名、键码、IL2CPP 类字段、UUID、函数地址、呈现 block 布局、引擎字节清单必须针对新游戏重新识别。
 
 本项目没有原 `TouchControls` 完整重建工程；当前桥接重建必须依赖已带该库的匹配基线 IPA。UI bridge 不是 Unity 主工程的替代品。
+
+## 1.4 可选副屏架构
+
+在现有GeometryProvider/InputAdapter旁增加游戏专用SecondaryStateAdapter → 版本化不可变Snapshot → 可见页面呈现；动作反向经能力、revision与目标token校验后进入游戏原生动作。异步图像/采样使用session与generation，迟到结果丢弃。副屏信息、虚拟键和设置独立显隐。此为建议架构，未修改仓库游戏实现；详见[副屏标准](10-secondary-screen.md)。

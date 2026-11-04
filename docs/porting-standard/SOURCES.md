@@ -23,3 +23,7 @@
 ## 授权恢复后核对
 
 已通过GitHub插件读取main的AGENTS.md、README.md、AI_HANDOFF.md、PROJECT_STATE.json；基线提交ccc741ddbe74cbbe32956609c18dba70e1dca812。远端源码身份0.2.19，现有本地后续状态不覆盖此远端身份。此前404和空安装列表为历史访问故障，当前访问已恢复。
+
+## AnimalDuo副屏代码研究 · 1.4
+
+固定提交[3ddaea8c9b115e259d252e6d1b66e2f360ba563c](https://github.com/ShawndYang/AnimalDuo/tree/3ddaea8c9b115e259d252e6d1b66e2f360ba563c)，检查日期2026-11-03。已读文件、逐项结论和证据边界见[副屏标准](../10-secondary-screen.md#8-研究来源与复用范围)及[机器清单](../../evidence/animalduo-study.json)。阅读Swift模型/云界面、Objective-C++宿主、共享布局、受限批写与三个性能记录；不运行第三方游戏、不复测性能、不复制代码或素材。将玩家价值、版本快照、按需刷新、状态校验、缓存与输入代次重新归纳为本手册S01–S08；不采用其硬件常数、游戏地址和验证结论。

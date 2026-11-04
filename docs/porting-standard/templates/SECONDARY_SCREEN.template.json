@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "status": "proposal",
+  "guide_version": "1.4",
+  "game": {
+    "name": "",
+    "route": "",
+    "title_id": null,
+    "build_id": null,
+    "binary_sha256": null
+  },
+  "level": "S0",
+  "player_problem": "",
+  "expected_benefit": "",
+  "page": {
+    "id": "",
+    "capability": "",
+    "data_source": "none",
+    "confidence": "unknown",
+    "state": "unsupported",
+    "snapshot_schema": 1,
+    "revision": null,
+    "sampled_at_monotonic_ms": null,
+    "session": null,
+    "stale_after_ms": null
+  },
+  "geometry": {
+    "profile": "",
+    "source": "runtime",
+    "game_pane": null,
+    "picture_rect": null,
+    "panel_rect": null,
+    "content_rect": null,
+    "left_rail": null,
+    "right_rail": null,
+    "footer": null,
+    "shared_draw_hit_geometry": true,
+    "hinge_policy": "pending"
+  },
+  "visibility": {
+    "panel": false,
+    "virtual_controls": false,
+    "physical_controller": false,
+    "background": false,
+    "generation": 0
+  },
+  "sampling": {
+    "host_hz": null,
+    "ui_hz": null,
+    "present_hz": null,
+    "hidden_hz": 0,
+    "thermal_policy": "pending"
+  },
+  "images": {
+    "visible_working_set_bytes": null,
+    "warm_cache_target_bytes": null,
+    "count_target": null,
+    "negative_cache_ttl_ms": null,
+    "negative_cache_count": null,
+    "max_decoded_pixels": null,
+    "deduplicate_inflight": true,
+    "reject_stale_generation": true
+  },
+  "actions": {
+    "enabled": false,
+    "source": "none",
+    "allowed": [],
+    "expected_revision_required": true,
+    "target_token_required": true,
+    "stale_action": "reject",
+    "automatic_non_idempotent_retry": false,
+    "write_adr": null,
+    "save_backup": null
+  },
+  "acceptance": {
+    "geometry": "pending",
+    "input": "pending",
+    "stale_snapshot": "pending",
+    "cancellation": "pending",
+    "cache_eviction": "pending",
+    "device_latency": "pending",
+    "sustained_energy": "pending"
+  },
+  "evidence": [],
+  "limitations": [
+    "This is a planning template, not an implemented adapter.",
+    "Rates and budgets must be measured for the target game."
+  ]
+}

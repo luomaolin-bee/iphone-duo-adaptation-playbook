@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "date": "2026-11-03",
+  "kind": "third-party-code-reading",
+  "repository": "https://github.com/ShawndYang/AnimalDuo",
+  "commit": "3ddaea8c9b115e259d252e6d1b66e2f360ba563c",
+  "read_files": [
+    "README.md",
+    "dm/ios/Sources/ACNHCompanion.swift",
+    "dm/host/companion_layout.h",
+    "dm/host/companion_apple.mm",
+    "dm/host/hle_companion.c",
+    "dm/ios/Sources/CloudSaves.swift",
+    "dm/third_party/eden_duo/NOTICES.txt",
+    "BUILD-FRAME-OPTIMIZED.txt",
+    "BUILD-LONG-SESSION.txt",
+    "BUILD-RESOURCE-OPTIMIZED.txt"
+  ],
+  "outputs": [
+    "docs/10-secondary-screen.md",
+    "docs/porting-standard/templates/SECONDARY_SCREEN.template.json",
+    "S01–S08"
+  ],
+  "implementation_imported": false,
+  "assets_imported": false,
+  "third_party_benchmarks_reproduced": false,
+  "game_code_changed": false,
+  "our_device_acceptance": "not performed",
+  "limits": [
+    "Target game/build bindings require independent analysis.",
+    "Cloud UI was read; full backend was not audited.",
+    "Reported upstream Mac benchmarks are not our iPhone power evidence.",
+    "No new assistant pages implemented in Silksong or Kirby.",
+    "Existing 1.3 Select device acceptance and 1.2 open issues are preserved."
+  ]
+}
