@@ -87,7 +87,7 @@ static void InstallLayoutHooks(void);
 
 static void BridgeInit(id self, SEL cmd, UIApplication *app) {
     if (!connectingScene && app.connectedScenes.count == 0) {
-        NSLog(@"[DuoSceneBridge 0.2.19] defer Unity initialization until scene connects");
+        NSLog(@"[DuoSceneBridge 0.2.21] defer Unity initialization until scene connects");
         return;
     }
     if (!initialized) {
@@ -110,7 +110,7 @@ static id BridgePick(id self, SEL cmd, NSSet *scenes) {
     connectingScene = (UIWindowScene *)scene;
     id controller = UIApplication.sharedApplication.delegate;
     if (![controller respondsToSelector:@selector(initUnityWithApplication:)]) {
-        NSLog(@"[DuoSceneBridge 0.2.19] missing Unity initializer");
+        NSLog(@"[DuoSceneBridge 0.2.21] missing Unity initializer");
         return;
     }
     [controller initUnityWithApplication:UIApplication.sharedApplication];
@@ -137,7 +137,7 @@ static id BridgePick(id self, SEL cmd, NSSet *scenes) {
     layoutTimer = [NSTimer timerWithTimeInterval:0.2 repeats:YES block:^(NSTimer *timer) { UpdateFoldLayout(); }];
     [[NSRunLoop mainRunLoop] addTimer:layoutTimer forMode:NSRunLoopCommonModes];
     UpdateFoldLayout();
-    NSLog(@"[DuoSceneBridge 0.2.19] scene connected window=%@ bounds=%@",self.window,NSStringFromCGRect(self.window.bounds));
+    NSLog(@"[DuoSceneBridge 0.2.21] scene connected window=%@ bounds=%@",self.window,NSStringFromCGRect(self.window.bounds));
 }
 - (void)sceneDidBecomeActive:(UIScene *)scene {
     if (!initialized || self.sentActive) return;
@@ -163,7 +163,7 @@ static id BridgePick(id self, SEL cmd, NSSet *scenes) {
 - (void)windowScene:(UIWindowScene *)scene didUpdateCoordinateSpace:(id<UICoordinateSpace>)previous interfaceOrientation:(UIInterfaceOrientation)orientation traitCollection:(UITraitCollection *)traits {
     self.window.frame = scene.coordinateSpace.bounds;
     [self.window.rootViewController.view setNeedsLayout];
-    NSLog(@"[DuoSceneBridge 0.2.19] resize %@",NSStringFromCGRect(self.window.bounds));
+    NSLog(@"[DuoSceneBridge 0.2.21] resize %@",NSStringFromCGRect(self.window.bounds));
 }
 - (void)sceneDidDisconnect:(UIScene *)scene {
     if (self.sentActive) [self sceneWillResignActive:scene];
@@ -199,6 +199,7 @@ static void InstallDirectTouch(void) {}
 #include "Branding.inc"
 #include "Editor.inc"
 #include "Controls.inc"
+#include "ControllerSelect.inc"
 
 static NSArray *RectArray(CGRect r) { return @[@(r.origin.x),@(r.origin.y),@(r.size.width),@(r.size.height)]; }
 static void FrameHook(UIView *view, SEL cmd, CGRect frame) {
@@ -271,7 +272,8 @@ static id ReportHook(id self, SEL cmd) {
     NSMutableDictionary *report = [originalReport(self,cmd) mutableCopy];
     if (!report) return nil;
     report[@"touchPatchVersion"] = report[@"patchVersion"] ?: @"unknown";
-    report[@"patchVersion"] = @"0.2.19";
+    report[@"patchVersion"] = @"0.2.21";
+    report[@"controllerSelect"]=ControllerSelectReport();
     report[@"duoBridge"] = foldState ?: @{};
     report[@"directTouch"]=@{@"experimentalBridgeEnabled":@NO,@"raycastClicks":@(directTapCount),@"managedExceptions":@(uiExceptionCount),@"nativeTouches":@(unityNativeTouchCount)};
     report[@"reflectionCapture"]=@{@"status":reflectionStatus?:@"unknown",@"frames":@(reflectionFrames),@"savesToDisk":@NO,@"targetFPS":@(atomic_load(&reflectionTargetFPS)),@"deliveredFPS":@(reflectionDeliveryFPS),@"latencyMS":@(reflectionLatencyMS),@"readbackBytes":@(reflectionReadbackBytes)};
@@ -406,7 +408,7 @@ static void UpdateFoldLayout(void) {
     splitActive = found; gameRegion = upper; controlsRegion = lower;
     PollGameContext();
     NSMutableDictionary *state = [foldState mutableCopy] ?: [NSMutableDictionary dictionary];
-    state[@"bridgeVersion"] = @"0.2.19";
+    state[@"bridgeVersion"] = @"0.2.21";
     state[@"divisionRegions"] = regions;
     state[@"occlusionRegions"] = occlusions;
     state[@"controlSafeInsets"] = @[@(controlSafeInsets.top),@(controlSafeInsets.left),@(controlSafeInsets.bottom),@(controlSafeInsets.right)];
@@ -511,7 +513,7 @@ __attribute__((constructor)) static void InstallDuoSceneBridge(void) {
         NSString *path = [NSBundle.mainBundle.privateFrameworksPath stringByAppendingPathComponent:@"UnityFramework.framework"];
         NSError *error = nil;
         if (![[NSBundle bundleWithPath:path] loadAndReturnError:&error]) {
-            NSLog(@"[DuoSceneBridge 0.2.19] UnityFramework load failed: %@",error);
+            NSLog(@"[DuoSceneBridge 0.2.21] UnityFramework load failed: %@",error);
             return;
         }
         ResolveRenderFunctions();
@@ -519,11 +521,12 @@ __attribute__((constructor)) static void InstallDuoSceneBridge(void) {
         Method init = class_getInstanceMethod(cls,@selector(initUnityWithApplication:));
         Method pick = class_getInstanceMethod(cls,NSSelectorFromString(@"pickStartupWindowScene:"));
         if (!init || !pick) {
-            NSLog(@"[DuoSceneBridge 0.2.19] required methods missing");
+            NSLog(@"[DuoSceneBridge 0.2.21] required methods missing");
             return;
         }
         originalInit = (void *)method_setImplementation(init,(IMP)BridgeInit);
         originalPick = (void *)method_setImplementation(pick,(IMP)BridgePick);
-        NSLog(@"[DuoSceneBridge 0.2.19] installed");
+        InstallControllerSelect();
+        NSLog(@"[DuoSceneBridge 0.2.21] installed");
     }
 }

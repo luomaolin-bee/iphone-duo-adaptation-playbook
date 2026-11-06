@@ -8,6 +8,11 @@ def run(command):
 def main():
  p=argparse.ArgumentParser();p.add_argument('--portable-only',action='store_true');a=p.parse_args();out=ROOT/'build';out.mkdir(exist_ok=True);checks=[]
  checks.append(run([sys.executable,'-m','unittest','discover','-s','tests','-p','test_*.py','-v']))
+ import shutil
+ compiler=shutil.which('clang')or shutil.which('cc')
+ if compiler:
+  binary=out/'controller-select-test';run([compiler,'-std=c99','-Wall','-Wextra','-Werror','-I',ROOT/'src',ROOT/'tests/controller-select-test.c','-o',binary]);checks.append(run([binary]))
+ else:checks.append('Controller Select policy C test skipped: no C compiler.')
  if not a.portable_only and platform.system()=='Darwin':
   native=[('model-test.m',['-fobjc-arc','-Wno-unused-function','-Wno-unused-parameter','-I',ROOT/'src','-framework','Foundation','-framework','CoreGraphics']),('feedback-test.c',['-I',ROOT/'src']),('metrics-test.c',[])]
   for source,flags in native:

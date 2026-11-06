@@ -1,3 +1,5 @@
+static void CycleControllerSelectMode(void);
+static NSString *ControllerSelectMenuTitle(void);
 static NSInteger pulseControl=-1;
 static BOOL pulseInput;
 static char moreButtonKey;
@@ -31,6 +33,7 @@ static void PulseControl(id pad,NSInteger control){
         for(UIWindow *window in gameWindow.windowScene.windows)RedrawPads(window);
     }]];
     [sheet addAction:[UIAlertAction actionWithTitle:feedbackEnabled?@"关闭场景与受伤反馈":@"开启场景与受伤反馈" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){feedbackEnabled=!feedbackEnabled;[NSUserDefaults.standardUserDefaults setBool:feedbackEnabled forKey:@"DuoFeedback019"];}]];
+    [sheet addAction:[UIAlertAction actionWithTitle:ControllerSelectMenuTitle() style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){CycleControllerSelectMode();}]];
     [sheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     sheet.popoverPresentationController.sourceView=button;sheet.popoverPresentationController.sourceRect=button.bounds;
     [presenter presentViewController:sheet animated:YES completion:nil];

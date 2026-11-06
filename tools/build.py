@@ -13,7 +13,7 @@ def main():
  version=subprocess.check_output(['xcrun','--sdk','iphoneos','--show-sdk-version'],text=True).strip()
  base=['xcrun','--sdk','iphoneos','clang','-arch','arm64','-miphoneos-version-min=15.0','-fobjc-arc','-Wall','-Wextra','-Werror','-Wno-unused-parameter']
  command=base+['-dynamiclib']
- for framework in ['UIKit','Foundation','CoreGraphics','QuartzCore','Metal','CoreImage','ImageIO','MetalPerformanceShaders']:command+=['-framework',framework]
+ for framework in ['UIKit','Foundation','CoreGraphics','QuartzCore','Metal','CoreImage','ImageIO','MetalPerformanceShaders','GameController']:command+=['-framework',framework]
  command+=['-install_name','@rpath/DuoSceneBridge.dylib','-o',str(out/'DuoSceneBridge.dylib'),str(ROOT/'src/DuoSceneBridge.m')]
  subprocess.run(command,check=True,cwd=ROOT)
  subprocess.run(base+['--analyze','-o',str(out/'analyzer.plist'),str(ROOT/'src/DuoSceneBridge.m')],check=True,cwd=ROOT)

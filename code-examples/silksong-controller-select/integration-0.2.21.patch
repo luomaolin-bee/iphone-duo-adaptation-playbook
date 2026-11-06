@@ -1,0 +1,138 @@
+diff --git a/src/Controls.inc b/src/Controls.inc
+index 5f3e3f2..ab64501 100644
+--- a/src/Controls.inc
++++ b/src/Controls.inc
+@@ -1,3 +1,5 @@
++static void CycleControllerSelectMode(void);
++static NSString *ControllerSelectMenuTitle(void);
+ static NSInteger pulseControl=-1;
+ static BOOL pulseInput;
+ static char moreButtonKey;
+@@ -31,6 +33,7 @@ static void PulseControl(id pad,NSInteger control){
+         for(UIWindow *window in gameWindow.windowScene.windows)RedrawPads(window);
+     }]];
+     [sheet addAction:[UIAlertAction actionWithTitle:feedbackEnabled?@"关闭场景与受伤反馈":@"开启场景与受伤反馈" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){feedbackEnabled=!feedbackEnabled;[NSUserDefaults.standardUserDefaults setBool:feedbackEnabled forKey:@"DuoFeedback019"];}]];
++    [sheet addAction:[UIAlertAction actionWithTitle:ControllerSelectMenuTitle() style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){CycleControllerSelectMode();}]];
+     [sheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+     sheet.popoverPresentationController.sourceView=button;sheet.popoverPresentationController.sourceRect=button.bounds;
+     [presenter presentViewController:sheet animated:YES completion:nil];
+diff --git a/src/DuoSceneBridge.m b/src/DuoSceneBridge.m
+index fa44662..b862a09 100644
+--- a/src/DuoSceneBridge.m
++++ b/src/DuoSceneBridge.m
+@@ -87,7 +87,7 @@ static void InstallLayoutHooks(void);
+ 
+ static void BridgeInit(id self, SEL cmd, UIApplication *app) {
+     if (!connectingScene && app.connectedScenes.count == 0) {
+-        NSLog(@"[DuoSceneBridge 0.2.19] defer Unity initialization until scene connects");
++        NSLog(@"[DuoSceneBridge 0.2.21] defer Unity initialization until scene connects");
+         return;
+     }
+     if (!initialized) {
+@@ -110,7 +110,7 @@ static id BridgePick(id self, SEL cmd, NSSet *scenes) {
+     connectingScene = (UIWindowScene *)scene;
+     id controller = UIApplication.sharedApplication.delegate;
+     if (![controller respondsToSelector:@selector(initUnityWithApplication:)]) {
+-        NSLog(@"[DuoSceneBridge 0.2.19] missing Unity initializer");
++        NSLog(@"[DuoSceneBridge 0.2.21] missing Unity initializer");
+         return;
+     }
+     [controller initUnityWithApplication:UIApplication.sharedApplication];
+@@ -137,7 +137,7 @@ static id BridgePick(id self, SEL cmd, NSSet *scenes) {
+     layoutTimer = [NSTimer timerWithTimeInterval:0.2 repeats:YES block:^(NSTimer *timer) { UpdateFoldLayout(); }];
+     [[NSRunLoop mainRunLoop] addTimer:layoutTimer forMode:NSRunLoopCommonModes];
+     UpdateFoldLayout();
+-    NSLog(@"[DuoSceneBridge 0.2.19] scene connected window=%@ bounds=%@",self.window,NSStringFromCGRect(self.window.bounds));
++    NSLog(@"[DuoSceneBridge 0.2.21] scene connected window=%@ bounds=%@",self.window,NSStringFromCGRect(self.window.bounds));
+ }
+ - (void)sceneDidBecomeActive:(UIScene *)scene {
+     if (!initialized || self.sentActive) return;
+@@ -163,7 +163,7 @@ static id BridgePick(id self, SEL cmd, NSSet *scenes) {
+ - (void)windowScene:(UIWindowScene *)scene didUpdateCoordinateSpace:(id<UICoordinateSpace>)previous interfaceOrientation:(UIInterfaceOrientation)orientation traitCollection:(UITraitCollection *)traits {
+     self.window.frame = scene.coordinateSpace.bounds;
+     [self.window.rootViewController.view setNeedsLayout];
+-    NSLog(@"[DuoSceneBridge 0.2.19] resize %@",NSStringFromCGRect(self.window.bounds));
++    NSLog(@"[DuoSceneBridge 0.2.21] resize %@",NSStringFromCGRect(self.window.bounds));
+ }
+ - (void)sceneDidDisconnect:(UIScene *)scene {
+     if (self.sentActive) [self sceneWillResignActive:scene];
+@@ -199,6 +199,7 @@ static void InstallDirectTouch(void) {}
+ #include "Branding.inc"
+ #include "Editor.inc"
+ #include "Controls.inc"
++#include "ControllerSelect.inc"
+ 
+ static NSArray *RectArray(CGRect r) { return @[@(r.origin.x),@(r.origin.y),@(r.size.width),@(r.size.height)]; }
+ static void FrameHook(UIView *view, SEL cmd, CGRect frame) {
+@@ -271,7 +272,8 @@ static id ReportHook(id self, SEL cmd) {
+     NSMutableDictionary *report = [originalReport(self,cmd) mutableCopy];
+     if (!report) return nil;
+     report[@"touchPatchVersion"] = report[@"patchVersion"] ?: @"unknown";
+-    report[@"patchVersion"] = @"0.2.19";
++    report[@"patchVersion"] = @"0.2.21";
++    report[@"controllerSelect"]=ControllerSelectReport();
+     report[@"duoBridge"] = foldState ?: @{};
+     report[@"directTouch"]=@{@"experimentalBridgeEnabled":@NO,@"raycastClicks":@(directTapCount),@"managedExceptions":@(uiExceptionCount),@"nativeTouches":@(unityNativeTouchCount)};
+     report[@"reflectionCapture"]=@{@"status":reflectionStatus?:@"unknown",@"frames":@(reflectionFrames),@"savesToDisk":@NO,@"targetFPS":@(atomic_load(&reflectionTargetFPS)),@"deliveredFPS":@(reflectionDeliveryFPS),@"latencyMS":@(reflectionLatencyMS),@"readbackBytes":@(reflectionReadbackBytes)};
+@@ -406,7 +408,7 @@ static void UpdateFoldLayout(void) {
+     splitActive = found; gameRegion = upper; controlsRegion = lower;
+     PollGameContext();
+     NSMutableDictionary *state = [foldState mutableCopy] ?: [NSMutableDictionary dictionary];
+-    state[@"bridgeVersion"] = @"0.2.19";
++    state[@"bridgeVersion"] = @"0.2.21";
+     state[@"divisionRegions"] = regions;
+     state[@"occlusionRegions"] = occlusions;
+     state[@"controlSafeInsets"] = @[@(controlSafeInsets.top),@(controlSafeInsets.left),@(controlSafeInsets.bottom),@(controlSafeInsets.right)];
+@@ -511,7 +513,7 @@ __attribute__((constructor)) static void InstallDuoSceneBridge(void) {
+         NSString *path = [NSBundle.mainBundle.privateFrameworksPath stringByAppendingPathComponent:@"UnityFramework.framework"];
+         NSError *error = nil;
+         if (![[NSBundle bundleWithPath:path] loadAndReturnError:&error]) {
+-            NSLog(@"[DuoSceneBridge 0.2.19] UnityFramework load failed: %@",error);
++            NSLog(@"[DuoSceneBridge 0.2.21] UnityFramework load failed: %@",error);
+             return;
+         }
+         ResolveRenderFunctions();
+@@ -519,11 +521,12 @@ __attribute__((constructor)) static void InstallDuoSceneBridge(void) {
+         Method init = class_getInstanceMethod(cls,@selector(initUnityWithApplication:));
+         Method pick = class_getInstanceMethod(cls,NSSelectorFromString(@"pickStartupWindowScene:"));
+         if (!init || !pick) {
+-            NSLog(@"[DuoSceneBridge 0.2.19] required methods missing");
++            NSLog(@"[DuoSceneBridge 0.2.21] required methods missing");
+             return;
+         }
+         originalInit = (void *)method_setImplementation(init,(IMP)BridgeInit);
+         originalPick = (void *)method_setImplementation(pick,(IMP)BridgePick);
+-        NSLog(@"[DuoSceneBridge 0.2.19] installed");
++        InstallControllerSelect();
++        NSLog(@"[DuoSceneBridge 0.2.21] installed");
+     }
+ }
+diff --git a/tools/build.py b/tools/build.py
+index bf7fc5b..7e9261d 100644
+--- a/tools/build.py
++++ b/tools/build.py
+@@ -13,7 +13,7 @@ def main():
+  version=subprocess.check_output(['xcrun','--sdk','iphoneos','--show-sdk-version'],text=True).strip()
+  base=['xcrun','--sdk','iphoneos','clang','-arch','arm64','-miphoneos-version-min=15.0','-fobjc-arc','-Wall','-Wextra','-Werror','-Wno-unused-parameter']
+  command=base+['-dynamiclib']
+- for framework in ['UIKit','Foundation','CoreGraphics','QuartzCore','Metal','CoreImage','ImageIO','MetalPerformanceShaders']:command+=['-framework',framework]
++ for framework in ['UIKit','Foundation','CoreGraphics','QuartzCore','Metal','CoreImage','ImageIO','MetalPerformanceShaders','GameController']:command+=['-framework',framework]
+  command+=['-install_name','@rpath/DuoSceneBridge.dylib','-o',str(out/'DuoSceneBridge.dylib'),str(ROOT/'src/DuoSceneBridge.m')]
+  subprocess.run(command,check=True,cwd=ROOT)
+  subprocess.run(base+['--analyze','-o',str(out/'analyzer.plist'),str(ROOT/'src/DuoSceneBridge.m')],check=True,cwd=ROOT)
+diff --git a/tools/test.py b/tools/test.py
+index 4098d2b..89f8fc4 100644
+--- a/tools/test.py
++++ b/tools/test.py
+@@ -8,6 +8,11 @@ def run(command):
+ def main():
+  p=argparse.ArgumentParser();p.add_argument('--portable-only',action='store_true');a=p.parse_args();out=ROOT/'build';out.mkdir(exist_ok=True);checks=[]
+  checks.append(run([sys.executable,'-m','unittest','discover','-s','tests','-p','test_*.py','-v']))
++ import shutil
++ compiler=shutil.which('clang')or shutil.which('cc')
++ if compiler:
++  binary=out/'controller-select-test';run([compiler,'-std=c99','-Wall','-Wextra','-Werror','-I',ROOT/'src',ROOT/'tests/controller-select-test.c','-o',binary]);checks.append(run([binary]))
++ else:checks.append('Controller Select policy C test skipped: no C compiler.')
+  if not a.portable_only and platform.system()=='Darwin':
+   native=[('model-test.m',['-fobjc-arc','-Wno-unused-function','-Wno-unused-parameter','-I',ROOT/'src','-framework','Foundation','-framework','CoreGraphics']),('feedback-test.c',['-I',ROOT/'src']),('metrics-test.c',[])]
+   for source,flags in native:
